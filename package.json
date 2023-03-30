@@ -1,0 +1,71 @@
+{
+  "name": "nest",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "build:docker": "vue-cli-service build --dest=./docker/dist/",
+    "lint": "eslint --fix --ext .js,.vue src",
+    "analyze": "vue-cli-service build --report"
+  },
+  "dependencies": {
+    "@chenfengyuan/vue-qrcode": "^1.0.1",
+    "@riophae/vue-treeselect": "0.4.0",
+    "avue-plugin-ueditor": "^0.1.4",
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "classlist-polyfill": "^1.2.0",
+    "clipboard": "^2.0.4",
+    "codemirror": "^5.53.2",
+    "crypto-js": "^3.1.9-1",
+    "dayjs": "^1.11.7",
+    "echarts": "^4.2.1",
+    "element-ui": "2.15.8",
+    "js-cookie": "^2.2.0",
+    "laf-client-sdk": "^1.0.0-beta.2",
+    "less-loader": "^6.0.0",
+    "nprogress": "^0.2.0",
+    "pig-avue-form-design": "1.6.0",
+    "script-loader": "^0.7.2",
+    "sockjs-client": "1.0.0",
+    "stomp-websocket": "2.3.4-next",
+    "vue": "2.6.14",
+    "vue-axios": "^2.1.2",
+    "vue-clipboard2": "^0.3.0",
+    "vue-cnname-avatar": "^1.0.6",
+    "vue-cron": "^1.0.9",
+    "vue-echarts": "^4.0.1",
+    "vue-json-editor": "^1.2.3",
+    "vue-json-tree-view": "^2.1.4",
+    "vue-quill-editor": "3.0.6",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.12.0",
+    "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vue/cli-service": "^3.12.0",
+    "@vue/eslint-config-standard": "4.0.0",
+    "babel-eslint": "^10.1.0",
+    "benz-amr-recorder": "^1.0.14",
+    "chai": "^4.1.2",
+    "compression-webpack-plugin": "^3.1.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "sass": "1.32.13",
+    "sass-loader": "10.1.1",
+    "vue-template-compiler": "2.6.14",
+    "vue-video-player": "^5.0.2"
+  },
+  "lint-staged": {
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
+}

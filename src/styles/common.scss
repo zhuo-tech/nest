@@ -1,0 +1,64 @@
+// 全局变量
+@import './variables.scss';
+// ele样式覆盖
+@import './element-ui.scss';
+// 顶部右侧显示
+@import './top.scss';
+// 导航标签
+@import './tags.scss';
+// 工具类函数
+@import './mixin.scss';
+// 侧面导航栏
+@import './sidebar.scss';
+// 动画
+@import './animate/vue-transition.scss';
+//主题
+@import './theme/index.scss';
+//适配
+@import './media.scss';
+//通用配置
+@import './normalize.scss';
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+* {
+  outline: none;
+}
+
+// 关于 图标 CSS 的设置
+[class^="icon-"] {
+  font-family: "iconfont" !important;
+  /* 以下内容参照第三方图标库本身的规则 */
+  font-size: 18px !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.avue-input-icon__item i, .avue-crud__icon--small {
+  font-family: "iconfont" !important;
+  /* 以下内容参照第三方图标库本身的规则 */
+  font-size: 24px !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.el-menu-item [class^=icon-] {
+  margin-right: 5px;
+  width: 24px;
+  text-align: center;
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.el-submenu [class^=icon-] {
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 24px;
+  text-align: center;
+  font-size: 18px;
+}
