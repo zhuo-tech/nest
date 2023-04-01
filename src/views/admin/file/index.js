@@ -1,20 +1,4 @@
-/*
- *    Copyright (c) 2018-2025, lengleng All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
- * Neither the name of the pig4cloud.com developer nor the names of its
- * contributors may be used to endorse or promote products derived from
- * this software without specific prior written permission.
- * Author: lengleng (wangiegie@gmail.com)
- */
-
+const upload_url = '/func/sys-file-upload'
 export const tableOption = {
   border: true,
   index: true,
@@ -45,13 +29,14 @@ export const tableOption = {
         res: 'data'
       },
       tip: '上传同步至文件服务器',
-      action: '/admin/sys-file/upload'
+      action: upload_url
     },
     {
       label: '空间',
       prop: 'bucketName',
       overHidden: true,
-      addDisplay: false
+      addDisplay: false,
+      search: true
     },
     {
       label: '文件名',
@@ -74,11 +59,6 @@ export const tableOption = {
     {
       label: '文件大小',
       prop: 'fileSize',
-      addDisplay: false
-    },
-    {
-      label: '上传人',
-      prop: 'createBy',
       addDisplay: false
     },
     {

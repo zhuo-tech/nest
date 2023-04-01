@@ -1,56 +1,44 @@
-/*
- *    Copyright (c) 2018-2025, lengleng All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * Redistributions of source code must retain the above copyright notice,
- * this list of conditions and the following disclaimer.
- * Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
- * Neither the name of the pig4cloud.com developer nor the names of its
- * contributors may be used to endorse or promote products derived from
- * this software without specific prior written permission.
- * Author: lengleng (wangiegie@gmail.com)
- */
+import {cloud} from "@/cloud"
 
-import request from '@/router/axios'
-
-export function fetchList(query) {
-  return request({
-    url: '/admin/sys-file/page',
-    method: 'get',
-    params: query
-  })
+const DB = cloud.database()
+const DB_NAME = {
+    SYS_FILE: 'sys_file'
 }
 
-export function addObj(obj) {
-  return request({
-    url: '/admin/sys-file',
-    method: 'post',
-    data: obj
-  })
+export async function fetchList(query) {
+    console.debug('File[fetchList] request param query->', query)
+    const {current, size, original, bucketName} = query
+    const qo = {}
+    if (original) {
+        qo.publicName = new RegExp(`.*${original}.*`)
+    }
+    if (bucketName) {
+        qo.bucketName = bucketName
+    }
+    const res = await DB
+        .collection(DB_NAME.SYS_FILE)
+        .where(qo)
+        .skip(size * (current - 1))
+        .limit(size)
+        .get()
+    const {total} = await DB.collection(DB_NAME.SYS_FILE)
+        .where(qo)
+        .count()
+    console.debug('分页查询结果: ', res.data)
+    const r = {
+        data: res.data,
+        success: res.ok,
+        total
+    }
+    console.debug('File[fetchList] result->', r)
+    return r
 }
 
-export function getObj(id) {
-  return request({
-    url: '/admin/sys-file/' + id,
-    method: 'get'
-  })
-}
-
-export function delObj(id) {
-  return request({
-    url: '/admin/sys-file/' + id,
-    method: 'delete'
-  })
-}
-
-export function putObj(obj) {
-  return request({
-    url: '/admin/sys-file',
-    method: 'put',
-    data: obj
-  })
+export async function delObj(id) {
+    console.debug('File[delObj] request param ID->', id)
+    const res = await DB.collection(DB_NAME.SYS_FILE).where({
+        _id: id
+    }).remove()
+    console.debug('File[delObj] response result->', res)
+    return res
 }

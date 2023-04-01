@@ -1,43 +1,27 @@
-<!--
-  -    Copyright (c) 2018-2025, lengleng All rights reserved.
-  -
-  - Redistribution and use in source and binary forms, with or without
-  - modification, are permitted provided that the following conditions are met:
-  -
-  - Redistributions of source code must retain the above copyright notice,
-  - this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-  - notice, this list of conditions and the following disclaimer in the
-  - documentation and/or other materials provided with the distribution.
-  - Neither the name of the pig4cloud.com developer nor the names of its
-  - contributors may be used to endorse or promote products derived from
-  - this software without specific prior written permission.
-  - Author: lengleng (wangiegie@gmail.com)
-  -->
 <template>
   <div class="execution">
     <basic-container>
       <avue-crud
-        ref="crud"
-        :page.sync="page"
-        :data="tableData"
-        :permission="permissionList"
-        :table-loading="tableLoading"
-        :option="tableOption"
-        :upload-after="uploadAfter"
-        @on-load="getList"
-        @search-change="searchChange"
-        @refresh-change="refreshChange"
-        @size-change="sizeChange"
-        @current-change="currentChange"
-        @row-del="rowDel"
+          ref="crud"
+          :page.sync="page"
+          :data="tableData"
+          :permission="permissionList"
+          :table-loading="tableLoading"
+          :option="tableOption"
+          :upload-after="uploadAfter"
+          @on-load="getList"
+          @search-change="searchChange"
+          @refresh-change="refreshChange"
+          @size-change="sizeChange"
+          @current-change="currentChange"
+          @row-del="rowDel"
       >
         <template slot="menu" slot-scope="scope">
           <el-button
-            type="text"
-            size="small"
-            icon="el-icon-download"
-            @click="download(scope.row, scope.index)"
+              type="text"
+              size="small"
+              icon="el-icon-download"
+              @click="handleDownloadFile(scope.row)"
           >下载
           </el-button>
         </template>
@@ -47,12 +31,13 @@
 </template>
 
 <script>
-import { delObj, fetchList } from '@/api/admin/sys-file'
-import { tableOption } from '@/const/crud/admin/sys-file'
-import { mapGetters } from 'vuex'
+import {delObj, fetchList} from '@/service/file.js'
+import {tableOption} from '@/views/admin/file/index.js'
+import {mapGetters} from 'vuex'
+import {OSS_ENDPOINT} from "@/cloud";
 
 export default {
-  name: 'sys-file',
+  name: 'SysFile',
   data() {
     return {
       searchForm: {},
@@ -60,7 +45,7 @@ export default {
       page: {
         total: 0, // 总页数
         currentPage: 1, // 当前页数
-        pageSize: 20 // 每页显示多少条
+        pageSize: 10 // 每页显示多少条
       },
       tableLoading: false,
       tableOption: tableOption
@@ -80,39 +65,39 @@ export default {
     getList(page, params) {
       this.tableLoading = true
       fetchList(
-        Object.assign(
-          {
-            descs: 'create_time',
-            current: page.currentPage,
-            size: page.pageSize
-          },
-          params,
-          this.searchForm
-        )
+          Object.assign(
+              {
+                current: page.currentPage,
+                size: page.pageSize
+              },
+              params,
+              this.searchForm
+          )
       )
-        .then(response => {
-          this.tableData = response.data.data.records
-          this.page.total = response.data.data.total
-          this.tableLoading = false
-        })
-        .catch(() => {
-          this.tableLoading = false
-        })
+          .then(response => {
+            const {data, total} = response
+            this.tableData = data
+            this.page.total = total
+            this.tableLoading = false
+          })
+          .catch(() => {
+            this.tableLoading = false
+          })
     },
-    rowDel: function(row, index) {
+    rowDel: function (row, index) {
       const _this = this
-      this.$confirm('是否确认删除ID为' + row.id, '提示', {
+      this.$confirm('是否确认删除ID为' + row._id, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       })
-        .then(function() {
-          return delObj(row.id)
-        })
-        .then(data => {
-          _this.$message.success('删除成功')
-          this.getList(this.page)
-        })
+          .then(function () {
+            return delObj(row._id)
+          })
+          .then(data => {
+            _this.$message.success('删除成功')
+            this.getList(this.page)
+          })
     },
     searchChange(form, done) {
       this.searchForm = form
@@ -129,12 +114,19 @@ export default {
     currentChange(current) {
       this.page.currentPage = current
     },
-    download: function(row, index) {
-      this.downBlobFile(
-        '/admin/sys-file/' + row.bucketName + '/' + row.fileName,
-        this.searchForm,
-        row.fileName
-      )
+    handleDownloadFile: function (row) {
+      // 生成一个a元素
+      let a = document.createElement('a')
+      // 将a的download属性设置为我们想要下载的图片名称
+      a.download = row.original
+      // 将生成的URL设置为a.href属性
+      a.href =
+          OSS_ENDPOINT + "/" + row.fileName +
+          '?response-content-type=application%2Foctet-stream'
+      document.body.appendChild(a)
+      // 触发a的单击事件
+      a.click()
+      document.body.removeChild(a)
     },
     uploadAfter(res, done, loading) {
       if (!this.validatenull(res.fileName)) {
