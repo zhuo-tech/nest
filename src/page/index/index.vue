@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="{'avue--collapse':isCollapse}"
-    class="avue-contail">
+      :class="{'avue--collapse':isCollapse}"
+      class="avue-contail">
     <div class="avue-header">
       <!-- 顶部导航栏 -->
       <top/>
@@ -17,32 +17,32 @@
         <tags/>
         <!-- 主体视图层 -->
         <div
-          id="avue-view"
-          style="height:100%;overflow-y:auto;overflow-x:hidden;">
+            id="avue-view"
+            style="height:100%;overflow-y:auto;overflow-x:hidden;">
           <keep-alive>
             <router-view
-              v-if="$route.meta.keepAlive"
-              class="avue-view"/>
+                v-if="$route.meta.keepAlive"
+                class="avue-view"/>
           </keep-alive>
           <router-view
-            v-if="!$route.meta.keepAlive"
-            class="avue-view"/>
+              v-if="!$route.meta.keepAlive"
+              class="avue-view"/>
         </div>
       </div>
     </div>
     <div
-      class="avue-shade"
-      @click="showCollapse"/>
+        class="avue-shade"
+        @click="showCollapse"/>
     <global-web-socket v-if="website.websocket" uri="/act/ws/info"/>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import tags from './tags'
 import top from './top/'
 import sidebar from './sidebar/'
-import { calcScreen } from '@/util'
+import {calcScreen} from '@/util'
 
 
 export default {
@@ -73,7 +73,7 @@ export default {
       this.$store.commit('SET_COLLAPSE')
     },
     openMenu(item = {}) {
-      this.$store.dispatch('GetMenu', { type: true, id: item._id }).then(data => {
+      this.$store.dispatch('GetMenu', {type: true, id: item._id}).then(data => {
         if (data.length !== 0) {
           this.$router.$avueRouter.formatRoutes(data, true)
         }

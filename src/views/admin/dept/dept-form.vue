@@ -1,19 +1,19 @@
 <template>
   <!-- 添加或修改菜单对话框 -->
   <el-dialog
-    :title="!form._id ? '新增': '修改'"
-    :visible.sync="visible"
-    append-to-body>
+      :title="!form._id ? '新增': '修改'"
+      :visible.sync="visible"
+      append-to-body>
     <el-form ref="dataForm" :model="form" :rules="rules" label-width="80px">
       <el-row>
         <el-col>
           <el-form-item label="上级部门">
             <treeselect
-              v-model="form.parentId"
-              :options="deptOptions"
-              :normalizer="normalizer"
-              :show-count="true"
-              placeholder="选择上级菜单"
+                v-model="form.parentId"
+                :options="deptOptions"
+                :normalizer="normalizer"
+                :show-count="true"
+                placeholder="选择上级菜单"
             />
           </el-form-item>
         </el-col>
@@ -33,13 +33,13 @@
 </template>
 
 <script>
-import { addObj, fetchTree, getObj, putObj } from '@/service/dept.js'
+import {addObj, fetchTree, getObj, putObj} from '@/service/dept.js'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 export default {
   name: 'DeptForm',
-  components: { Treeselect },
+  components: {Treeselect},
   data() {
     return {
       // 遮罩层
@@ -55,10 +55,10 @@ export default {
       // 表单校验
       rules: {
         name: [
-          { required: true, message: '部门名称不能为空', trigger: 'blur' }
+          {required: true, message: '部门名称不能为空', trigger: 'blur'}
         ],
         sortOrder: [
-          { required: true, message: '部门顺序不能为空', trigger: 'blur' }
+          {required: true, message: '部门顺序不能为空', trigger: 'blur'}
         ]
       }
     }
@@ -108,7 +108,7 @@ export default {
     getTreeselect() {
       fetchTree().then(response => {
         this.deptOptions = []
-        const dept = { _id: "0", name: '根部门', children: response.data }
+        const dept = {_id: "0", name: '根部门', children: response.data}
         this.deptOptions.push(dept)
       })
     },

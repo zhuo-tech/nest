@@ -4,49 +4,49 @@
       <template>
         <el-row>
           <el-form
-            ref="ruleForm"
-            :model="ruleForm"
-            :rules="rules"
-            label-width="100px"
-            class="demo-ruleForm"
+              ref="ruleForm"
+              :model="ruleForm"
+              :rules="rules"
+              label-width="100px"
+              class="demo-ruleForm"
           >
             <el-col :span="12">
               <div class="grid-content bg-purple">
                 <el-form-item label="头像">
                   <el-upload
-                    :headers="headers"
-                    :show-file-list="false"
-                    :on-success="handleAvatarSuccess"
-                    class="avatar-uploader"
-                    action="/admin/sys-file/upload"
+                      :headers="headers"
+                      :show-file-list="false"
+                      :on-success="handleAvatarSuccess"
+                      class="avatar-uploader"
+                      action="/admin/sys-file/upload"
                   >
-                    <img v-if="ruleForm.avatar" id="avatar" :src="avatarUrl" class="avatar" alt="头像" />
-                    <i v-else class="el-icon-plus avatar-uploader-icon" />
+                    <img v-if="ruleForm.avatar" id="avatar" :src="avatarUrl" class="avatar" alt="头像"/>
+                    <i v-else class="el-icon-plus avatar-uploader-icon"/>
                   </el-upload>
                 </el-form-item>
                 <el-form-item label="用户名" prop="username">
                   <el-input v-model="ruleForm.username" type="text" disabled/>
                 </el-form-item>
                 <el-form-item label="手机号" prop="phone">
-                  <el-input v-model="ruleForm.phone" placeholder="验证码登录使用" />
+                  <el-input v-model="ruleForm.phone" placeholder="验证码登录使用"/>
                 </el-form-item>
                 <el-form-item label="昵称" prop="nickname">
-                  <el-input v-model="ruleForm.nickname" placeholder="昵称" />
+                  <el-input v-model="ruleForm.nickname" placeholder="昵称"/>
                 </el-form-item>
                 <el-form-item label="姓名" prop="name">
-                  <el-input v-model="ruleForm.name" placeholder="姓名" />
+                  <el-input v-model="ruleForm.name" placeholder="姓名"/>
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
-                  <el-input v-model="ruleForm.email" placeholder="邮箱" />
+                  <el-input v-model="ruleForm.email" placeholder="邮箱"/>
                 </el-form-item>
                 <el-form-item label="原密码" prop="password">
-                  <el-input v-model="ruleForm.password" type="password" auto-complete="off" />
+                  <el-input v-model="ruleForm.password" type="password" auto-complete="off"/>
                 </el-form-item>
                 <el-form-item label="新密码" prop="newPassword">
-                  <el-input v-model="ruleForm.newPassword" type="password" auto-complete="off" />
+                  <el-input v-model="ruleForm.newPassword" type="password" auto-complete="off"/>
                 </el-form-item>
                 <el-form-item label="确认密码" prop="confirmPassword">
-                  <el-input v-model="ruleForm.confirmPassword" type="password" auto-complete="off" />
+                  <el-input v-model="ruleForm.confirmPassword" type="password" auto-complete="off"/>
                 </el-form-item>
                 <el-form-item>
                   <el-button type="primary" @click="submitForm()">提交</el-button>
@@ -62,11 +62,11 @@
 </template>
 
 <script>
-import { handleImg } from '@/util'
-import { mapState } from 'vuex'
+import {handleImg} from '@/util'
+import {mapState} from 'vuex'
 import store from '@/store'
-import { isValidateNoneMobile } from '@/util/validate'
-import { editInfo } from '@/service/user.js'
+import {isValidateNoneMobile} from '@/util/validate'
+import {editInfo} from '@/service/user.js'
 
 export default {
   data() {
@@ -105,7 +105,7 @@ export default {
         email: ''
       },
       rules: {
-        phone: [{ required: false, validator: validatePhone, trigger: 'blur' }],
+        phone: [{required: false, validator: validatePhone, trigger: 'blur'}],
         password: [
           {
             required: true,
@@ -123,7 +123,7 @@ export default {
           }
         ],
         confirmPassword: [
-          { required: false, validator: validatePass, trigger: 'blur' }
+          {required: false, validator: validatePass, trigger: 'blur'}
         ]
       }
     }

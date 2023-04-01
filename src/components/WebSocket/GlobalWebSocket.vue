@@ -22,7 +22,7 @@ export default {
         timeout: 10 * 1000, // 响应超时时间
         pingTimeoutObj: null, // 延时发送心跳的定时器
         pongTimeoutObj: null, // 接收心跳响应的定时器
-        pingMessage: JSON.stringify({ type: 'ping' }) // 心跳请求信息
+        pingMessage: JSON.stringify({type: 'ping'}) // 心跳请求信息
       }
     }
   },
@@ -37,7 +37,7 @@ export default {
   created() {
     this.initWebSocket()
   },
-  destroyed: function() {
+  destroyed: function () {
     this.webSocket.close()
     this.clearTimeoutObj(this.heartbeat)
   },
@@ -81,7 +81,7 @@ export default {
     /**
      * 清空定时器
      */
-    clearTimeoutObj: function(heartbeat) {
+    clearTimeoutObj: function (heartbeat) {
       heartbeat.pingTimeoutObj && clearTimeout(heartbeat.pingTimeoutObj)
       heartbeat.pongTimeoutObj && clearTimeout(heartbeat.pongTimeoutObj)
     },

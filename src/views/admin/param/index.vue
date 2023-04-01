@@ -2,30 +2,30 @@
   <div class="execution">
     <basic-container>
       <avue-crud
-        ref="crud"
-        :page.sync="page"
-        :data="tableData"
-        :permission="permissionList"
-        :table-loading="tableLoading"
-        :before-open="beforeOpen"
-        :option="tableOption"
-        @on-load="getList"
-        @search-change="searchChange"
-        @refresh-change="refreshChange"
-        @size-change="sizeChange"
-        @current-change="currentChange"
-        @row-update="handleUpdate"
-        @row-save="handleSave"
-        @row-del="rowDel">
+          ref="crud"
+          :page.sync="page"
+          :data="tableData"
+          :permission="permissionList"
+          :table-loading="tableLoading"
+          :before-open="beforeOpen"
+          :option="tableOption"
+          @on-load="getList"
+          @search-change="searchChange"
+          @refresh-change="refreshChange"
+          @size-change="sizeChange"
+          @current-change="currentChange"
+          @row-update="handleUpdate"
+          @row-save="handleSave"
+          @row-del="rowDel">
       </avue-crud>
     </basic-container>
   </div>
 </template>
 
 <script>
-import { addObj, delObj, fetchList, putObj } from '@/service/param.js'
-import { tableOption } from '@/views/admin/param/index.js'
-import { mapGetters } from 'vuex'
+import {addObj, delObj, fetchList, putObj} from '@/service/param.js'
+import {tableOption} from '@/views/admin/param/index.js'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'SysParam',
@@ -59,18 +59,18 @@ export default {
         current: page.currentPage,
         size: page.pageSize
       }, params, this.searchForm)).then(response => {
-        const { data, total } = response
+        const {data, total} = response
         this.tableData = data
         this.page.total = total
         this.tableLoading = false
       })
     },
-    rowDel: function(row, index) {
+    rowDel: function (row, index) {
       this.$confirm('是否确认删除ID为' + row.publicName, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
+      }).then(function () {
         return delObj(row._id)
       }).then(data => {
         this.getList(this.page)
@@ -89,9 +89,9 @@ export default {
      * @param done 为表单关闭函数
      *
      **/
-    handleUpdate: function(row, index, done, loading) {
+    handleUpdate: function (row, index, done, loading) {
       putObj(row).then(res => {
-        const { code, msg } = res
+        const {code, msg} = res
         if (code === 0) {
           this.$message.success('修改成功')
           done()
@@ -110,7 +110,7 @@ export default {
      * @param done 为表单关闭函数
      *
      **/
-    handleSave: function(row, done, loading) {
+    handleSave: function (row, done, loading) {
       addObj(row).then(data => {
         this.$message.success('添加成功')
         done()

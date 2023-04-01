@@ -2,77 +2,77 @@
   <div class="avue-top">
     <div class="top-bar__left">
       <div
-        v-if="showCollapse"
-        :class="[{ 'avue-breadcrumb--active': isCollapse }]"
-        class="avue-breadcrumb">
+          v-if="showCollapse"
+          :class="[{ 'avue-breadcrumb--active': isCollapse }]"
+          class="avue-breadcrumb">
         <i
-          class="icon-navicon"
-          @click="setCollapse"/>
+            class="icon-navicon"
+            @click="setCollapse"/>
       </div>
     </div>
     <div class="top-bar__title">
       <div
-        v-if="showMenu"
-        class="top-bar__item top-bar__item--show">
+          v-if="showMenu"
+          class="top-bar__item top-bar__item--show">
         <top-menu/>
       </div>
     </div>
     <div class="top-bar__right">
       <el-tooltip
-        v-if="showColor"
-        effect="dark"
-        content="主题色"
-        placement="bottom">
+          v-if="showColor"
+          effect="dark"
+          content="主题色"
+          placement="bottom">
         <div class="top-bar__item">
           <top-color/>
         </div>
       </el-tooltip>
       <el-tooltip
-        v-if="showDebug"
-        :content="logsFlag?'没有错误日志':`${logsLen}条错误日志`"
-        effect="dark"
-        placement="bottom">
+          v-if="showDebug"
+          :content="logsFlag?'没有错误日志':`${logsLen}条错误日志`"
+          effect="dark"
+          placement="bottom">
         <div class="top-bar__item">
           <top-logs/>
         </div>
       </el-tooltip>
       <el-tooltip
-        v-if="showLock"
-        effect="dark"
-        content="锁屏"
-        placement="bottom">
+          v-if="showLock"
+          effect="dark"
+          content="锁屏"
+          placement="bottom">
         <div class="top-bar__item">
           <top-lock/>
         </div>
       </el-tooltip>
       <el-tooltip
-        v-if="showTheme"
-        effect="dark"
-        content="特色主题"
-        placement="bottom">
+          v-if="showTheme"
+          effect="dark"
+          content="特色主题"
+          placement="bottom">
         <div class="top-bar__item top-bar__item--show">
           <top-theme/>
         </div>
       </el-tooltip>
       <el-tooltip
-        v-if="showFullScreen"
-        :content="isFullScreen?'退出全屏':'全屏'"
-        effect="dark"
-        placement="bottom">
+          v-if="showFullScreen"
+          :content="isFullScreen?'退出全屏':'全屏'"
+          effect="dark"
+          placement="bottom">
         <div class="top-bar__item">
           <i
-            :class="isFullScreen?'icon-zuixiaohua':'icon-quanpingzuidahua'"
-            @click="handleScreen"/>
+              :class="isFullScreen?'icon-zuixiaohua':'icon-quanpingzuidahua'"
+              @click="handleScreen"/>
         </div>
       </el-tooltip>
       <el-tooltip
-        v-if="userInfo.avatar"
-        effect="dark"
-        content="用户头像"
-        placement="bottom">
+          v-if="userInfo.avatar"
+          effect="dark"
+          content="用户头像"
+          placement="bottom">
         <img
-          id="thumbnail"
-          class="top-bar__img">
+            id="thumbnail"
+            class="top-bar__img">
       </el-tooltip>
       <el-dropdown>
         <span class="el-dropdown-link">
@@ -87,12 +87,12 @@
             <router-link to="/info/index">个人信息</router-link>
           </el-dropdown-item>
           <el-dropdown-item
-            divided
-            @click.native="$refs.seting.open()">界面设置
+              divided
+              @click.native="$refs.seting.open()">界面设置
           </el-dropdown-item>
           <el-dropdown-item
-            divided
-            @click.native="logout">退出系统
+              divided
+              @click.native="logout">退出系统
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -101,8 +101,8 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapState } from 'vuex'
-import { fullscreenToggel, handleImg, listenfullscreen } from '@/util'
+import {mapGetters, mapState} from 'vuex'
+import {fullscreenToggel, handleImg, listenfullscreen} from '@/util'
 import topLock from './top-lock'
 import topMenu from './top-menu'
 import topTheme from './top-theme'
@@ -166,7 +166,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$store.dispatch('LogOut').then(() => {
-          this.$router.push({ path: '/login' })
+          this.$router.push({path: '/login'})
         })
       })
     }

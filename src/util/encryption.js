@@ -7,14 +7,14 @@ import CryptoJS from 'crypto-js'
  * @returns 密文
  */
 export function aesEncrypt(src, keyWord = 'XwKsGlMcdPMEhR1B') {
-  const key = CryptoJS.enc.Utf8.parse(keyWord)
-  // 加密
-  var encrypted = CryptoJS.AES.encrypt(src, key, {
-    iv: key,
-    mode: CryptoJS.mode.CFB,
-    padding: CryptoJS.pad.NoPadding
-  })
-  return encrypted.toString()
+    const key = CryptoJS.enc.Utf8.parse(keyWord)
+    // 加密
+    var encrypted = CryptoJS.AES.encrypt(src, key, {
+        iv: key,
+        mode: CryptoJS.mode.CFB,
+        padding: CryptoJS.pad.NoPadding
+    })
+    return encrypted.toString()
 }
 
 /**
@@ -24,16 +24,16 @@ export function aesEncrypt(src, keyWord = 'XwKsGlMcdPMEhR1B') {
  * @returns 明文
  */
 export function aesDecrypt(result, keyWord) {
-  const key = CryptoJS.enc.Latin1.parse(keyWord)
-  var iv = key
-  // 解密逻辑
-  var decryptd = CryptoJS.AES.decrypt(result, key, {
-    iv: iv,
-    mode: CryptoJS.mode.CFB,
-    padding: CryptoJS.pad.NoPadding
-  })
+    const key = CryptoJS.enc.Latin1.parse(keyWord)
+    var iv = key
+    // 解密逻辑
+    var decryptd = CryptoJS.AES.decrypt(result, key, {
+        iv: iv,
+        mode: CryptoJS.mode.CFB,
+        padding: CryptoJS.pad.NoPadding
+    })
 
-  return decryptd.toString(CryptoJS.enc.Utf8)
+    return decryptd.toString(CryptoJS.enc.Utf8)
 }
 
 /**
@@ -42,6 +42,6 @@ export function aesDecrypt(result, keyWord) {
  * @returns 密文
  */
 export function base64Encrypt(src) {
-  const encodedWord = CryptoJS.enc.Utf8.parse(src)
-  return CryptoJS.enc.Base64.stringify(encodedWord)
+    const encodedWord = CryptoJS.enc.Utf8.parse(src)
+    return CryptoJS.enc.Base64.stringify(encodedWord)
 }

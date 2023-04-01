@@ -4,32 +4,32 @@
       <el-form :inline="true">
         <el-form-item label="菜单名称" prop="menuName">
           <el-input
-            v-model="queryParams.menuName"
-            placeholder="请输入菜单名称"
-            clearable
-            size="small"
-            @keyup.enter.native="getList"
+              v-model="queryParams.menuName"
+              placeholder="请输入菜单名称"
+              clearable
+              size="small"
+              @keyup.enter.native="getList"
           />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" @click="getList">搜索</el-button>
 
           <el-button
-            v-if="permissions.sys_menu_add"
-            icon="el-icon-plus"
-            type="primary"
-            @click="addOrUpdateHandle(false)">
+              v-if="permissions.sys_menu_add"
+              icon="el-icon-plus"
+              type="primary"
+              @click="addOrUpdateHandle(false)">
             添加
           </el-button>
         </el-form-item>
       </el-form>
 
       <el-table
-        v-loading="loading"
-        border
-        :data="menuList"
-        row-key="_id"
-        :tree-props="{children: 'children', hasChildren: 'hasChildrens'}">
+          v-loading="loading"
+          border
+          :data="menuList"
+          row-key="_id"
+          :tree-props="{children: 'children', hasChildren: 'hasChildrens'}">
         <el-table-column prop="name" label="菜单名称" :show-overflow-tooltip="true" width="180"></el-table-column>
         <el-table-column prop="icon" label="图标" align="center" width="100">
           <template slot-scope="scope">
@@ -61,25 +61,25 @@
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template slot-scope="scope">
             <el-button
-              v-if="permissions.sys_menu_add"
-              size="small"
-              type="text"
-              icon="el-icon-plus"
-              @click="addOrUpdateHandle(false,scope.row._id)">新增
+                v-if="permissions.sys_menu_add"
+                size="small"
+                type="text"
+                icon="el-icon-plus"
+                @click="addOrUpdateHandle(false,scope.row._id)">新增
             </el-button>
             <el-button
-              v-if="permissions.sys_menu_edit"
-              size="small"
-              type="text"
-              icon="el-icon-edit"
-              @click="addOrUpdateHandle(true,scope.row._id)">修改
+                v-if="permissions.sys_menu_edit"
+                size="small"
+                type="text"
+                icon="el-icon-edit"
+                @click="addOrUpdateHandle(true,scope.row._id)">修改
             </el-button>
             <el-button
-              v-if="permissions.sys_menu_del"
-              size="small"
-              type="text"
-              icon="el-icon-delete"
-              @click="handleDelete(scope.row)">删除
+                v-if="permissions.sys_menu_del"
+                size="small"
+                type="text"
+                icon="el-icon-delete"
+                @click="handleDelete(scope.row)">删除
             </el-button>
           </template>
         </el-table-column>
@@ -91,13 +91,13 @@
 </template>
 
 <script>
-import { delObj, list } from '@/service/menu'
+import {delObj, list} from '@/service/menu'
 import TableForm from './menu-form'
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'Menu',
-  components: { TableForm },
+  components: {TableForm},
   data() {
     return {
       addOrUpdateVisible: false,
@@ -130,7 +130,7 @@ export default {
     getList() {
       this.loading = true
       list().then(response => {
-        const { data } = response
+        const {data} = response
         this.menuList = data
         this.loading = false
       })
@@ -140,7 +140,7 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
+      }).then(function () {
         return delObj(row._id)
       }).then(() => {
         this.getList()

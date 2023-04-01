@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'Wel',
@@ -26,7 +26,7 @@ export default {
         span: 6,
         data: [
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '错误日志',
@@ -36,7 +36,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '数据展示',
@@ -46,7 +46,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '权限管理',
@@ -56,7 +56,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '权限管理',
@@ -71,7 +71,7 @@ export default {
         span: 4,
         data: [
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '今日注册',
@@ -81,7 +81,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '今日登录',
@@ -90,7 +90,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '今日订阅',
@@ -99,7 +99,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '今日评论',
@@ -108,7 +108,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '今日评论',
@@ -117,7 +117,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '今日评论',
@@ -131,7 +131,7 @@ export default {
         span: 6,
         data: [
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '转化率（日同比 28%）',
@@ -140,7 +140,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '签到率（日同比 11%）',
@@ -149,7 +149,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: 'CPU使用率',
@@ -158,7 +158,7 @@ export default {
             target: '_blank'
           },
           {
-            click: function(item) {
+            click: function (item) {
               alert(JSON.stringify(item))
             },
             title: '使用人数',

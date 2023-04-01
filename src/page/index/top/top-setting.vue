@@ -1,12 +1,12 @@
 <template>
   <span class="setting">
     <div
-      :class="{'setting__shade--show':isShade}"
-      class="setting__shade"
-      @click="close"/>
+        :class="{'setting__shade--show':isShade}"
+        class="setting__shade"
+        @click="close"/>
     <div
-      :class="{'setting__content--show':box}"
-      class="setting__content">
+        :class="{'setting__content--show':box}"
+        class="setting__content">
       <div class="setting__header">版权信息</div>
       <div class="setting__body setting__about">
         <p>1.0.0</p>
@@ -18,8 +18,8 @@
       <el-scrollbar style="height:500px">
         <div class="setting__body setting__form">
           <avue-form
-            v-model="form"
-            :option="option"/>
+              v-model="form"
+              :option="option"/>
         </div>
       </el-scrollbar>
     </div>
@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
-import { list, option } from '@/const/setting/'
-import { validatenull } from '@/util/validate'
+import {mapGetters, mapState} from 'vuex'
+import {list, option} from '@/const/setting/'
+import {validatenull} from '@/util/validate'
 
 export default {
   data() {

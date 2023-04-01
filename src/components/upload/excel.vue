@@ -2,23 +2,23 @@
   <div>
     <!-- 导入对话框 -->
     <el-dialog
-      :title="title"
-      :visible.sync="upload.open"
-      width="400px"
-      append-to-body
+        :title="title"
+        :visible.sync="upload.open"
+        width="400px"
+        append-to-body
     >
       <el-upload
-        ref="upload"
-        :limit="1"
-        accept=".xlsx, .xls"
-        :headers="headers"
-        :action="url"
-        :disabled="upload.isUploading"
-        :on-progress="handleFileUploadProgress"
-        :on-success="handleFileSuccess"
-        :on-error="handleFileError"
-        :auto-upload="false"
-        drag
+          ref="upload"
+          :limit="1"
+          accept=".xlsx, .xls"
+          :headers="headers"
+          :action="url"
+          :disabled="upload.isUploading"
+          :on-progress="handleFileUploadProgress"
+          :on-success="handleFileSuccess"
+          :on-error="handleFileError"
+          :auto-upload="false"
+          drag
       >
         <i class="el-icon-upload"></i>
         <div class="el-upload__text">
@@ -28,11 +28,11 @@
         <div slot="tip" class="el-upload__tip text-center">
           <span>仅允许导入xls、xlsx格式文件。</span>
           <el-link
-            v-if="tempUrl"
-            type="primary"
-            :underline="false"
-            style="font-size:12px;vertical-align: baseline;"
-            @click="downExcelTemp"
+              v-if="tempUrl"
+              type="primary"
+              :underline="false"
+              style="font-size:12px;vertical-align: baseline;"
+              @click="downExcelTemp"
           >下载模板
           </el-link>
         </div>
@@ -47,20 +47,20 @@
     <el-dialog title="校验失败数据" :visible.sync="errorVisible">
       <el-table :data="errorData">
         <el-table-column
-          property="lineNum"
-          label="行号"
-          width="50"
+            property="lineNum"
+            label="行号"
+            width="50"
         ></el-table-column>
         <el-table-column
-          property="errors"
-          label="错误描述"
-          show-overflow-tooltip
+            property="errors"
+            label="错误描述"
+            show-overflow-tooltip
         >
           <template slot-scope="scope">
             <el-tag
-              v-for="error in scope.row.errors"
-              :key="error"
-              type="danger"
+                v-for="error in scope.row.errors"
+                :key="error"
+                type="danger"
             >{{ error }}
             </el-tag
             >
@@ -102,7 +102,7 @@ export default {
     }
   },
   computed: {
-    headers: function() {
+    headers: function () {
       const tenantId = store.getters.userInfo.tenantId
       return {
         'Authorization': 'Bearer ' + store.getters.access_token,

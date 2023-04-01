@@ -1,65 +1,65 @@
 <template>
   <div style="position: relative;">
     <div
-      v-if="type === '2'"
-      class="verify-img-out"
-      :style="{height: (parseInt(setSize.imgHeight) + vSpace) + 'px'}"
+        v-if="type === '2'"
+        class="verify-img-out"
+        :style="{height: (parseInt(setSize.imgHeight) + vSpace) + 'px'}"
     >
       <div
-        class="verify-img-panel"
-        :style="{width: setSize.imgWidth,
+          class="verify-img-panel"
+          :style="{width: setSize.imgWidth,
                  height: setSize.imgHeight,}"
       >
         <img
-          :src="'data:image/png;base64,'+backImgBase"
-          alt
-          style="width:100%;height:100%;display:block"
+            :src="'data:image/png;base64,'+backImgBase"
+            alt
+            style="width:100%;height:100%;display:block"
         />
         <div v-show="showRefresh" class="verify-refresh" @click="refresh">
           <i class="iconfont icon-refresh"></i>
         </div>
         <transition name="tips">
           <span
-            v-if="tipWords"
-            class="verify-tips"
-            :class="passFlag ?'suc-bg':'err-bg'"
+              v-if="tipWords"
+              class="verify-tips"
+              :class="passFlag ?'suc-bg':'err-bg'"
           >{{ tipWords }}</span>
         </transition>
       </div>
     </div>
     <!-- 公共部分 -->
     <div
-      class="verify-bar-area"
-      :style="{width: setSize.imgWidth,
+        class="verify-bar-area"
+        :style="{width: setSize.imgWidth,
                height: barSize.height,
                'line-height':barSize.height}"
     >
       <span class="verify-msg" v-text="text"></span>
       <div
-        class="verify-left-bar"
-        :style="{width: (leftBarWidth!==undefined)?leftBarWidth: barSize.height, height: barSize.height, 'border-color': leftBarBorderColor, transaction: transitionWidth}"
+          class="verify-left-bar"
+          :style="{width: (leftBarWidth!==undefined)?leftBarWidth: barSize.height, height: barSize.height, 'border-color': leftBarBorderColor, transaction: transitionWidth}"
       >
         <span class="verify-msg" v-text="finishText"></span>
         <div
-          class="verify-move-block"
-          :style="{width: barSize.height, height: barSize.height, 'background-color': moveBlockBackgroundColor, left: moveBlockLeft, transition: transitionLeft}"
-          @touchstart="start"
-          @mousedown="start"
+            class="verify-move-block"
+            :style="{width: barSize.height, height: barSize.height, 'background-color': moveBlockBackgroundColor, left: moveBlockLeft, transition: transitionLeft}"
+            @touchstart="start"
+            @mousedown="start"
         >
           <i :class="['verify-icon iconfont', iconClass]" :style="{color: iconColor}"></i>
           <div
-            v-if="type === '2'"
-            class="verify-sub-block"
-            :style="{'width':Math.floor(parseInt(setSize.imgWidth)*47/310)+ 'px',
+              v-if="type === '2'"
+              class="verify-sub-block"
+              :style="{'width':Math.floor(parseInt(setSize.imgWidth)*47/310)+ 'px',
                      'height': setSize.imgHeight,
                      'top':'-' + (parseInt(setSize.imgHeight) + vSpace) + 'px',
                      'background-size': setSize.imgWidth + ' ' + setSize.imgHeight,
             }"
           >
             <img
-              :src="'data:image/png;base64,'+blockBackImgBase"
-              alt
-              style="width:100%;height:100%;display:block"
+                :src="'data:image/png;base64,'+blockBackImgBase"
+                alt
+                style="width:100%;height:100%;display:block"
             />
           </div>
         </div>
@@ -72,9 +72,9 @@
  * VerifySlide
  * @description 滑块
  * */
-import { aesEncrypt } from './../utils/ase'
-import { resetSize } from './../utils/util'
-import { reqCheck, reqGet } from './../api/index'
+import {aesEncrypt} from './../utils/ase'
+import {resetSize} from './../utils/util'
+import {reqCheck, reqGet} from './../api/index'
 
 //  "captchaType":"blockPuzzle",
 export default {
@@ -183,7 +183,7 @@ export default {
   },
   mounted() {
     // 禁止拖拽
-    this.$el.onselectstart = function() {
+    this.$el.onselectstart = function () {
       return false
     }
   },
@@ -201,43 +201,43 @@ export default {
 
       var _this = this
 
-      window.removeEventListener('touchmove', function(e) {
+      window.removeEventListener('touchmove', function (e) {
         _this.move(e)
       })
-      window.removeEventListener('mousemove', function(e) {
-        _this.move(e)
-      })
-
-      //鼠标松开
-      window.removeEventListener('touchend', function() {
-        _this.end()
-      })
-      window.removeEventListener('mouseup', function() {
-        _this.end()
-      })
-
-      window.addEventListener('touchmove', function(e) {
-        _this.move(e)
-      })
-      window.addEventListener('mousemove', function(e) {
+      window.removeEventListener('mousemove', function (e) {
         _this.move(e)
       })
 
       //鼠标松开
-      window.addEventListener('touchend', function() {
+      window.removeEventListener('touchend', function () {
         _this.end()
       })
-      window.addEventListener('mouseup', function() {
+      window.removeEventListener('mouseup', function () {
+        _this.end()
+      })
+
+      window.addEventListener('touchmove', function (e) {
+        _this.move(e)
+      })
+      window.addEventListener('mousemove', function (e) {
+        _this.move(e)
+      })
+
+      //鼠标松开
+      window.addEventListener('touchend', function () {
+        _this.end()
+      })
+      window.addEventListener('mouseup', function () {
         _this.end()
       })
     },
 
     //鼠标按下
-    start: function(e) {
+    start: function (e) {
       e = e || window.event
       const x = e.touches ? e.touches[0].pageX : e.clientX
       this.startLeft = Math.floor(
-        x - this.barArea.getBoundingClientRect().left
+          x - this.barArea.getBoundingClientRect().left
       )
       this.startMoveTime = +new Date() //开始滑动的时间
       if (this.isEnd === false) {
@@ -250,22 +250,22 @@ export default {
       }
     },
     //鼠标移动
-    move: function(e) {
+    move: function (e) {
       e = e || window.event
       if (this.status && this.isEnd === false) {
         const x = e.touches ? e.touches[0].pageX : e.clientX
         var bar_area_left = this.barArea.getBoundingClientRect().left
         var move_block_left = x - bar_area_left //小方块相对于父元素的left值
         if (
-          move_block_left >=
-          this.barArea.offsetWidth -
-          parseInt(parseInt(this.blockSize.width) / 2) -
-          2
-        ) {
-          move_block_left =
+            move_block_left >=
             this.barArea.offsetWidth -
             parseInt(parseInt(this.blockSize.width) / 2) -
             2
+        ) {
+          move_block_left =
+              this.barArea.offsetWidth -
+              parseInt(parseInt(this.blockSize.width) / 2) -
+              2
         }
         if (move_block_left <= 0) {
           move_block_left = parseInt(parseInt(this.blockSize.width) / 2)
@@ -277,24 +277,24 @@ export default {
     },
 
     //鼠标松开
-    end: function() {
+    end: function () {
       this.endMovetime = +new Date()
       var _this = this
       //判断是否重合
       if (this.status && this.isEnd === false) {
         var moveLeftDistance = parseInt(
-          (this.moveBlockLeft || '').replace('px', '')
+            (this.moveBlockLeft || '').replace('px', '')
         )
         moveLeftDistance =
-          (moveLeftDistance * 310) / parseInt(this.setSize.imgWidth)
+            (moveLeftDistance * 310) / parseInt(this.setSize.imgWidth)
         const data = {
           captchaType: this.captchaType,
           pointJson: this.secretKey
-            ? aesEncrypt(
-              JSON.stringify({ x: moveLeftDistance, y: 5.0 }),
-              this.secretKey
-            )
-            : JSON.stringify({ x: moveLeftDistance, y: 5.0 }),
+              ? aesEncrypt(
+                  JSON.stringify({x: moveLeftDistance, y: 5.0}),
+                  this.secretKey
+              )
+              : JSON.stringify({x: moveLeftDistance, y: 5.0}),
           token: this.backToken
         }
         reqCheck(data).then((response) => {
@@ -314,23 +314,23 @@ export default {
             }
             this.passFlag = true
             this.tipWords = `${(
-              (this.endMovetime - this.startMoveTime) /
-              1000
+                (this.endMovetime - this.startMoveTime) /
+                1000
             ).toFixed(2)}s验证成功`
             var captchaVerification = this.secretKey
-              ? aesEncrypt(
-                this.backToken +
+                ? aesEncrypt(
+                    this.backToken +
+                    '---' +
+                    JSON.stringify({x: moveLeftDistance, y: 5.0}),
+                    this.secretKey
+                )
+                : this.backToken +
                 '---' +
-                JSON.stringify({ x: moveLeftDistance, y: 5.0 }),
-                this.secretKey
-              )
-              : this.backToken +
-              '---' +
-              JSON.stringify({ x: moveLeftDistance, y: 5.0 })
+                JSON.stringify({x: moveLeftDistance, y: 5.0})
             setTimeout(() => {
               this.tipWords = ''
               this.$parent.closeBox()
-              this.$parent.$emit('success', { captchaVerification })
+              this.$parent.$emit('success', {captchaVerification})
             }, 1000)
           } else {
             this.moveBlockBackgroundColor = '#d9534f'
@@ -338,7 +338,7 @@ export default {
             this.iconColor = '#fff'
             this.iconClass = 'icon-close'
             this.passFlag = false
-            setTimeout(function() {
+            setTimeout(function () {
               _this.refresh()
             }, 1000)
             this.$parent.$emit('error', this)
@@ -352,7 +352,7 @@ export default {
       }
     },
 
-    refresh: function() {
+    refresh: function () {
       this.showRefresh = true
       this.finishText = ''
 

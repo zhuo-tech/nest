@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'Logo',
@@ -22,7 +22,7 @@ export default {
     ...mapGetters(['website', 'keyCollapse'])
   },
   methods: {
-    goIndex: function() {
+    goIndex: function () {
       this.$store.commit('REMOVE_LIKE_TOP_MENUID')
       window.location.href = '/'
     }

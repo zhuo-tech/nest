@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="{'basic-container--block':block}"
-    class="basic-container">
+      :class="{'basic-container--block':block}"
+      class="basic-container">
     <el-card>
       <slot/>
     </el-card>

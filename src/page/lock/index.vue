@@ -2,23 +2,23 @@
   <div class="lock-container">
     <div class="lock-form animated bounceInDown">
       <div
-        class="animated"
-        :class="{'shake':passwdError,'bounceOut':pass}">
+          class="animated"
+          :class="{'shake':passwdError,'bounceOut':pass}">
         <h3 class="title">{{ userInfo.username }}</h3>
         <el-input
-          v-model="passwd"
-          placeholder="请输入登录密码"
-          type="password"
-          class="input-with-select animated"
-          @keyup.enter.native="handleLogin">
+            v-model="passwd"
+            placeholder="请输入登录密码"
+            type="password"
+            class="input-with-select animated"
+            @keyup.enter.native="handleLogin">
           <el-button
-            slot="append"
-            icon="icon-jiesuo"
-            @click="handleLogin"></el-button>
+              slot="append"
+              icon="icon-jiesuo"
+              @click="handleLogin"></el-button>
           <el-button
-            slot="append"
-            icon="icon-tuichu"
-            @click="handleLogout"></el-button>
+              slot="append"
+              icon="icon-tuichu"
+              @click="handleLogout"></el-button>
         </el-input>
       </div>
 
@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapState } from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 
 export default {
   name: 'lock',
@@ -51,7 +51,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$store.dispatch('LogOut').then(() => {
-          this.$router.push({ path: '/login' })
+          this.$router.push({path: '/login'})
         })
       })
     },
@@ -72,7 +72,7 @@ export default {
       setTimeout(() => {
         this.$store.commit('CLEAR_LOCK')
         this.$router.push({
-          path: this.$router.$avueRouter.getPath({ src: this.tag.value })
+          path: this.$router.$avueRouter.getPath({src: this.tag.value})
         })
       }, 1000)
     }

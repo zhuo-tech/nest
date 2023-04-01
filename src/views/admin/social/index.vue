@@ -2,29 +2,29 @@
   <div class="execution">
     <basic-container>
       <avue-crud
-        ref="crud"
-        :page.sync="page"
-        :data="tableData"
-        :table-loading="tableLoading"
-        :option="tableOption"
-        :permission="permissionList"
-        :before-open="beforeOpen"
-        @on-load="getList"
-        @refresh-change="refreshChange"
-        @search-change="searchChange"
-        @size-change="sizeChange"
-        @current-change="currentChange"
-        @row-update="handleUpdate"
-        @row-save="handleSave"
-        @row-del="rowDel" />
+          ref="crud"
+          :page.sync="page"
+          :data="tableData"
+          :table-loading="tableLoading"
+          :option="tableOption"
+          :permission="permissionList"
+          :before-open="beforeOpen"
+          @on-load="getList"
+          @refresh-change="refreshChange"
+          @search-change="searchChange"
+          @size-change="sizeChange"
+          @current-change="currentChange"
+          @row-update="handleUpdate"
+          @row-save="handleSave"
+          @row-del="rowDel"/>
     </basic-container>
   </div>
 </template>
 
 <script>
-import { addObj, delObj, fetchList, putObj } from '@/service/social.js'
-import { tableOption } from '@/views/admin/social/index.js'
-import { mapGetters } from 'vuex'
+import {addObj, delObj, fetchList, putObj} from '@/service/social.js'
+import {tableOption} from '@/views/admin/social/index.js'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'SysSocialDetails',
@@ -58,27 +58,27 @@ export default {
         current: page.currentPage,
         size: page.pageSize
       }, params, this.searchForm)).then(response => {
-        const { data, total } = response
+        const {data, total} = response
         this.tableData = data
         this.page.total = total
         this.tableLoading = false
       })
     },
-    rowDel: function(row, index) {
+    rowDel: function (row, index) {
       var _this = this
       this.$confirm('是否确认删除ID为' + row._id, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
+      }).then(function () {
         return delObj(row.id)
       }).then(() => {
         _this.$message.success('删除成功')
         this.refreshChange()
-      }).catch(function() {
+      }).catch(function () {
       })
     },
-    handleUpdate: function(row, index, done) {
+    handleUpdate: function (row, index, done) {
       if (row.appSecret && row.appSecret.indexOf('*') >= 0) {
         row.appSecret = undefined
       }
@@ -91,7 +91,7 @@ export default {
         done()
       })
     },
-    handleSave: function(row, done, loading) {
+    handleSave: function (row, done, loading) {
       addObj(row).then(() => {
         this.tableData.push(Object.assign({}, row))
         this.$message.success('添加成功')

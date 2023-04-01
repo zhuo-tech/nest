@@ -2,53 +2,53 @@
   <div class="menu-wrapper">
     <template v-for="item in menu">
       <el-menu-item
-        v-if="validatenull(item[childrenKey]) && vaildRoles(item)"
-        v-show="item.visible==='1'"
-        :key="item[labelKey]"
-        :index="item[pathKey]"
-        :class="{'is-active':vaildAvtive(item)}"
-        @click="open(item)">
+          v-if="validatenull(item[childrenKey]) && vaildRoles(item)"
+          v-show="item.visible==='1'"
+          :key="item[labelKey]"
+          :index="item[pathKey]"
+          :class="{'is-active':vaildAvtive(item)}"
+          @click="open(item)">
         <i :class="item[iconKey]"/>
         <span
-          slot="title"
-          :alt="item[pathKey]">{{ item[labelKey] }}</span>
+            slot="title"
+            :alt="item[pathKey]">{{ item[labelKey] }}</span>
       </el-menu-item>
       <el-submenu
-        v-else-if="!validatenull(item[childrenKey])&&vaildRoles(item)"
-        v-show="item.visible==='1'"
-        :key="item[labelKey]"
-        :index="item[pathKey]">
+          v-else-if="!validatenull(item[childrenKey])&&vaildRoles(item)"
+          v-show="item.visible==='1'"
+          :key="item[labelKey]"
+          :index="item[pathKey]">
         <template slot="title">
           <i :class="item[iconKey]"/>
           <span
-            slot="title"
-            :class="{'el-menu--display':collapse && first}">{{ item[labelKey] }}</span>
+              slot="title"
+              :class="{'el-menu--display':collapse && first}">{{ item[labelKey] }}</span>
         </template>
         <template v-for="(child,cindex) in item[childrenKey]">
           <el-menu-item
-            v-if="validatenull(child[childrenKey])"
-            v-show="item.visible==='1'"
-            :key="child[labelKey]"
-            :index="child[pathKey] + cindex"
-            :class="{'is-active':vaildAvtive(child)}"
-            @click="open(child)">
+              v-if="validatenull(child[childrenKey])"
+              v-show="item.visible==='1'"
+              :key="child[labelKey]"
+              :index="child[pathKey] + cindex"
+              :class="{'is-active':vaildAvtive(child)}"
+              @click="open(child)">
             <i :class="child[iconKey]"/>
             <span slot="title">{{ child[labelKey] }}</span>
           </el-menu-item>
           <sidebar-item
-            v-else
-            :key="cindex"
-            :menu="[child]"
-            :props="props"
-            :screen="screen"
-            :collapse="collapse"/>
+              v-else
+              :key="cindex"
+              :menu="[child]"
+              :props="props"
+              :screen="screen"
+              :collapse="collapse"/>
         </template>
       </el-submenu>
     </template>
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import config from './config.js'
 
 export default {
@@ -102,7 +102,7 @@ export default {
   methods: {
     vaildAvtive(item) {
       const groupFlag = (item['group'] || []).some(ele =>
-        this.$route.path.includes(ele)
+          this.$route.path.includes(ele)
       )
       return this.nowTagValue === item[this.pathKey] || groupFlag
     },

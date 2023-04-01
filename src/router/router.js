@@ -8,7 +8,7 @@ import Store from '../store/'
 Vue.use(VueRouter)
 //创建路由
 export const createRouter = () => new VueRouter({
-  routes: [...PageRouter, ...ViewsRouter]
+    routes: [...PageRouter, ...ViewsRouter]
 })
 
 const Router = createRouter()
@@ -17,9 +17,9 @@ Router.$avueRouter.formatRoutes(Store.state.user.menu, true)
 
 // 重置路由
 export function resetRouter() {
-  const newRouter = createRouter()
-  Router.matcher = newRouter.matcher
-  AvueRouter.install(Router, Store)
+    const newRouter = createRouter()
+    Router.matcher = newRouter.matcher
+    AvueRouter.install(Router, Store)
 }
 
 export default Router

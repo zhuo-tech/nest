@@ -1,19 +1,19 @@
 <template>
   <div>
     <el-dialog
-      :visible.sync="box"
-      title="选择"
-      width="50%">
+        :visible.sync="box"
+        title="选择"
+        width="50%">
       <el-radio-group
-        v-model="text"
-        class="list">
+          v-model="text"
+          class="list">
         <el-row :span="24">
           <el-col
-            v-for="(item,index) in list"
-            :key="index"
-            :md="4"
-            :xs="12"
-            :sm="4">
+              v-for="(item,index) in list"
+              :key="index"
+              :md="4"
+              :xs="12"
+              :sm="4">
             <el-radio :label="item.value">{{ item.name }}</el-radio>
           </el-col>
         </el-row>
@@ -22,15 +22,15 @@
 
     <span>
       <i
-        class="el-icon-view"
-        @click="open"/>
+          class="el-icon-view"
+          @click="open"/>
     </span>
   </div>
 </template>
 
 <script>
-import { setTheme } from '@/util'
-import { mapGetters } from 'vuex'
+import {setTheme} from '@/util'
+import {mapGetters} from 'vuex'
 
 export default {
   data() {
@@ -69,7 +69,7 @@ export default {
     ...mapGetters(['themeName'])
   },
   watch: {
-    text: function(val) {
+    text: function (val) {
       this.$store.commit('SET_THEME_NAME', val)
       setTheme(val)
     }

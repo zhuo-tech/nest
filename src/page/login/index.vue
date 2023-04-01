@@ -19,7 +19,7 @@
 </template>
 <script>
 import userLogin from './userlogin'
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import topColor from '@/page/index/top/top-color'
 
 export default {

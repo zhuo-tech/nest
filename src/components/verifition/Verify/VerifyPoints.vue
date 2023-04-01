@@ -2,8 +2,8 @@
   <div style="position: relative">
     <div class="verify-img-out">
       <div
-        class="verify-img-panel"
-        :style="{'width': setSize.imgWidth,
+          class="verify-img-panel"
+          :style="{'width': setSize.imgWidth,
                  'height': setSize.imgHeight,
                  'background-size' : setSize.imgWidth + ' '+ setSize.imgHeight,
                  'margin-bottom': vSpace + 'px'}"
@@ -12,18 +12,18 @@
           <i class="iconfont icon-refresh"></i>
         </div>
         <img
-          ref="canvas"
-          :src="'data:image/png;base64,'+pointBackImgBase"
-          alt
-          style="width:100%;height:100%;display:block"
-          @click="bindingClick?canvasClick($event):undefined"
+            ref="canvas"
+            :src="'data:image/png;base64,'+pointBackImgBase"
+            alt
+            style="width:100%;height:100%;display:block"
+            @click="bindingClick?canvasClick($event):undefined"
         />
 
         <div
-          v-for="(tempPoint, index) in tempPoints"
-          :key="index"
-          class="point-area"
-          :style="{
+            v-for="(tempPoint, index) in tempPoints"
+            :key="index"
+            class="point-area"
+            :style="{
             'background-color':'#1abd6c',
             color:'#fff',
             'z-index':9999,
@@ -42,8 +42,8 @@
     </div>
     <!-- 'height': this.barSize.height, -->
     <div
-      class="verify-bar-area"
-      :style="{'width': setSize.imgWidth,
+        class="verify-bar-area"
+        :style="{'width': setSize.imgWidth,
                'color': barAreaColor,
                'border-color': barAreaBorderColor,
                'line-height': barSize.height}"
@@ -57,9 +57,9 @@
  * VerifyPoints
  * @description 点选
  * */
-import { resetSize } from './../utils/util'
-import { aesEncrypt } from './../utils/ase'
-import { reqCheck, reqGet } from './../api/index'
+import {resetSize} from './../utils/util'
+import {aesEncrypt} from './../utils/ase'
+import {reqCheck, reqGet} from './../api/index'
 
 export default {
   name: 'VerifyPoints',
@@ -137,7 +137,7 @@ export default {
   },
   mounted() {
     // 禁止拖拽
-    this.$el.onselectstart = function() {
+    this.$el.onselectstart = function () {
       return false
     }
   },
@@ -164,16 +164,16 @@ export default {
           // var flag = this.comparePos(this.fontPos, this.checkPosArr);
           //发送后端请求
           var captchaVerification = this.secretKey
-            ? aesEncrypt(
-              this.backToken + '---' + JSON.stringify(this.checkPosArr),
-              this.secretKey
-            )
-            : this.backToken + '---' + JSON.stringify(this.checkPosArr)
+              ? aesEncrypt(
+                  this.backToken + '---' + JSON.stringify(this.checkPosArr),
+                  this.secretKey
+              )
+              : this.backToken + '---' + JSON.stringify(this.checkPosArr)
           const data = {
             captchaType: this.captchaType,
             pointJson: this.secretKey
-              ? aesEncrypt(JSON.stringify(this.checkPosArr), this.secretKey)
-              : JSON.stringify(this.checkPosArr),
+                ? aesEncrypt(JSON.stringify(this.checkPosArr), this.secretKey)
+                : JSON.stringify(this.checkPosArr),
             token: this.backToken
           }
           reqCheck(data).then((response) => {
@@ -189,7 +189,7 @@ export default {
                   this.refresh()
                 }, 1500)
               }
-              this.$parent.$emit('success', { captchaVerification })
+              this.$parent.$emit('success', {captchaVerification})
             } else {
               this.$parent.$emit('error', this)
               this.barAreaColor = '#d9534f'
@@ -208,17 +208,17 @@ export default {
     },
 
     //获取坐标
-    getMousePos: function(obj, e) {
+    getMousePos: function (obj, e) {
       var x = e.offsetX
       var y = e.offsetY
-      return { x, y }
+      return {x, y}
     },
     //创建坐标点
-    createPoint: function(pos) {
+    createPoint: function (pos) {
       this.tempPoints.push(Object.assign({}, pos))
       return ++this.num
     },
-    refresh: function() {
+    refresh: function () {
       this.tempPoints.splice(0, this.tempPoints.length)
       this.barAreaColor = '#000'
       this.barAreaBorderColor = '#ddd'
@@ -254,7 +254,7 @@ export default {
       var newPointArr = pointArr.map((p) => {
         const x = Math.round((310 * p.x) / parseInt(imgSize.imgWidth))
         const y = Math.round((155 * p.y) / parseInt(imgSize.imgHeight))
-        return { x, y }
+        return {x, y}
       })
       // console.log(newPointArr,"newPointArr");
       return newPointArr

@@ -2,65 +2,65 @@
   <div class="app-container calendar-list-container">
     <basic-container>
       <avue-crud
-        ref="crud"
-        v-model="form"
-        :option="tableOption"
-        :data="list"
-        :page.sync="page"
-        :table-loading="listLoading"
-        :before-open="handleOpenBefore"
-        @on-load="getList"
-        @search-change="searchChange"
-        @refresh-change="refreshChange"
-        @size-change="sizeChange"
-        @current-change="currentChange"
-        @row-update="update"
-        @row-save="create">
+          ref="crud"
+          v-model="form"
+          :option="tableOption"
+          :data="list"
+          :page.sync="page"
+          :table-loading="listLoading"
+          :before-open="handleOpenBefore"
+          @on-load="getList"
+          @search-change="searchChange"
+          @refresh-change="refreshChange"
+          @size-change="sizeChange"
+          @current-change="currentChange"
+          @row-update="update"
+          @row-save="create">
         <template slot="menuLeft">
           <el-button
-            v-if="roleManager_btn_add"
-            class="filter-item"
-            type="primary"
-            icon="el-icon-edit"
-            @click="handleCreate">添加
+              v-if="roleManager_btn_add"
+              class="filter-item"
+              type="primary"
+              icon="el-icon-edit"
+              @click="handleCreate">添加
           </el-button>
         </template>
         <template slot="dsScopeForm" slot-scope="{}">
           <div v-if="form.dsType === 1">
             <el-tree
-              ref="scopeTree"
-              :data="dsScopeData"
-              :check-strictly="true"
-              :props="defaultProps"
-              :default-checked-keys="checkedDsScope"
-              class="filter-tree"
-              node-key="_id"
-              highlight-current
-              show-checkbox />
+                ref="scopeTree"
+                :data="dsScopeData"
+                :check-strictly="true"
+                :props="defaultProps"
+                :default-checked-keys="checkedDsScope"
+                class="filter-tree"
+                node-key="_id"
+                highlight-current
+                show-checkbox/>
           </div>
         </template>
 
         <template slot="menu" slot-scope="scope">
           <el-button
-            v-if="roleManager_btn_edit"
-            type="text"
-            size="small"
-            icon="el-icon-edit"
-            @click="handleUpdate(scope.row, scope.index)">编辑
+              v-if="roleManager_btn_edit"
+              type="text"
+              size="small"
+              icon="el-icon-edit"
+              @click="handleUpdate(scope.row, scope.index)">编辑
           </el-button>
           <el-button
-            v-if="roleManager_btn_del"
-            type="text"
-            size="small"
-            icon="el-icon-delete"
-            @click="handleDelete(scope.row, scope.index)">删除
+              v-if="roleManager_btn_del"
+              type="text"
+              size="small"
+              icon="el-icon-delete"
+              @click="handleDelete(scope.row, scope.index)">删除
           </el-button>
           <el-button
-            v-if="roleManager_btn_perm"
-            type="text"
-            size="small"
-            icon="el-icon-plus"
-            @click="handlePermission(scope.row, scope.index)">权限
+              v-if="roleManager_btn_perm"
+              type="text"
+              size="small"
+              icon="el-icon-plus"
+              @click="handlePermission(scope.row, scope.index)">权限
           </el-button>
         </template>
       </avue-crud>
@@ -69,17 +69,17 @@
     <el-dialog :visible.sync="dialogPermissionVisible" :close-on-click-modal="false" title="分配权限">
       <div class="dialog-main-tree">
         <el-tree
-          ref="menuTree"
-          :data="treeData"
-          :default-checked-keys="checkedKeys"
-          :check-strictly="false"
-          :props="defaultProps"
-          :filter-node-method="filterNode"
-          class="filter-tree"
-          node-key="_id"
-          highlight-current
-          show-checkbox
-          default-expand-all />
+            ref="menuTree"
+            :data="treeData"
+            :default-checked-keys="checkedKeys"
+            :check-strictly="false"
+            :props="defaultProps"
+            :filter-node-method="filterNode"
+            class="filter-tree"
+            node-key="_id"
+            highlight-current
+            show-checkbox
+            default-expand-all/>
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" size="small" @click="updatePermission(roleId)">更 新
@@ -92,15 +92,15 @@
 </template>
 
 <script>
-import { addObj, delObj, fetchList, fetchMenuIdsByRoleId, permissionUpd, putObj } from '@/service/role.js'
-import { tableOption } from '@/views/admin/role/index.js'
-import { fetchTree } from '@/service/dept.js'
-import { list } from '@/service/menu.js'
-import { mapGetters } from 'vuex'
+import {addObj, delObj, fetchList, fetchMenuIdsByRoleId, permissionUpd, putObj} from '@/service/role.js'
+import {tableOption} from '@/views/admin/role/index.js'
+import {fetchTree} from '@/service/dept.js'
+import {list} from '@/service/menu.js'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'TableRole',
-  components: { },
+  components: {},
   data() {
     return {
       searchForm: {},
@@ -158,7 +158,7 @@ export default {
         size: page.pageSize,
         descs: ['create_time']
       }, params, this.searchForm)).then(response => {
-        const { data, total } = response
+        const {data, total} = response
         this.list = data
         this.page.total = total
         this.listLoading = false
@@ -187,7 +187,7 @@ export default {
     handleOpenBefore(show, type) {
       window.boxType = type
       fetchTree().then(response => {
-        const { data } = response
+        const {data} = response
         this.dsScopeData = data
         if (this.form.dsScope) {
           this.checkedDsScope = (this.form.dsScope).split(',')
@@ -205,20 +205,20 @@ export default {
     },
     handlePermission(row) {
       fetchMenuIdsByRoleId(row._id)
-        .then(response => {
-          const { data: keys } = response
-          this.checkedKeys = keys
-          return list()
-        })
-        .then(response => {
-          const { data } = response
-          this.treeData = data
-          // 解析出所有的太监节点
-          this.checkedKeys = this.resolveAllEunuchNodeId(this.treeData, this.checkedKeys, [])
-          this.dialogPermissionVisible = true
-          this.roleId = row._id
-          this.roleCode = row.roleCode
-        })
+          .then(response => {
+            const {data: keys} = response
+            this.checkedKeys = keys
+            return list()
+          })
+          .then(response => {
+            const {data} = response
+            this.treeData = data
+            // 解析出所有的太监节点
+            this.checkedKeys = this.resolveAllEunuchNodeId(this.treeData, this.checkedKeys, [])
+            this.dialogPermissionVisible = true
+            this.roleId = row._id
+            this.roleCode = row.roleCode
+          })
     },
     /**
      * 解析出所有的太监节点id

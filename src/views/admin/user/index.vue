@@ -4,37 +4,37 @@
       <el-row :span="24">
         <el-col :xs="24" :sm="24" :md="5" class="user__tree">
           <avue-tree
-            :option="treeOption"
-            :data="treeData"
-            @node-click="nodeClick"
+              :option="treeOption"
+              :data="treeData"
+              @node-click="nodeClick"
           >
           </avue-tree>
         </el-col>
         <el-col :xs="24" :sm="24" :md="19" class="user__main">
           <avue-crud
-            ref="crud"
-            v-model="form"
-            :option="option"
-            :page.sync="page"
-            :table-loading="listLoading"
-            :before-open="handleOpenBefore"
-            :data="list"
-            @on-load="getList"
-            @search-change="searchChange"
-            @refresh-change="refreshChange"
-            @size-change="sizeChange"
-            @current-change="currentChange"
-            @row-update="update"
-            @row-save="create"
+              ref="crud"
+              v-model="form"
+              :option="option"
+              :page.sync="page"
+              :table-loading="listLoading"
+              :before-open="handleOpenBefore"
+              :data="list"
+              @on-load="getList"
+              @search-change="searchChange"
+              @refresh-change="refreshChange"
+              @size-change="sizeChange"
+              @current-change="currentChange"
+              @row-update="update"
+              @row-save="create"
           >
             <template slot="menuLeft">
               <el-button
-                v-if="sys_user_add"
-                class="filter-item"
-                type="primary"
-                size="small"
-                icon="el-icon-edit"
-                @click="$refs.crud.rowAdd()"
+                  v-if="sys_user_add"
+                  class="filter-item"
+                  type="primary"
+                  size="small"
+                  icon="el-icon-edit"
+                  @click="$refs.crud.rowAdd()"
               >添加
               </el-button>
             </template>
@@ -59,47 +59,47 @@
             </template>
             <template slot="menu" slot-scope="scope">
               <el-button
-                v-if="sys_user_edit"
-                type="text"
-                size="small"
-                icon="el-icon-edit"
-                @click="handleUpdate(scope.row, scope.index)"
+                  v-if="sys_user_edit"
+                  type="text"
+                  size="small"
+                  icon="el-icon-edit"
+                  @click="handleUpdate(scope.row, scope.index)"
               >编辑
               </el-button>
               <el-button
-                v-if="sys_user_del"
-                type="text"
-                size="small"
-                icon="el-icon-delete"
-                @click="deletes(scope.row, scope.index)"
+                  v-if="sys_user_del"
+                  type="text"
+                  size="small"
+                  icon="el-icon-delete"
+                  @click="deletes(scope.row, scope.index)"
               >删除
               </el-button>
             </template>
             <template slot="deptIdForm">
               <avue-input-tree
-                v-model="form.deptId"
-                :node-click="getNodeData"
-                :dic="treeDeptData"
-                :props="defaultProps"
-                placeholder="请选择所属部门"
+                  v-model="form.deptId"
+                  :node-click="getNodeData"
+                  :dic="treeDeptData"
+                  :props="defaultProps"
+                  placeholder="请选择所属部门"
               />
             </template>
             <template slot="roleForm">
               <avue-select
-                v-model="role"
-                :dic="rolesOptions"
-                :props="roleProps"
-                multiple
-                placeholder="请选择角色"
+                  v-model="role"
+                  :dic="rolesOptions"
+                  :props="roleProps"
+                  multiple
+                  placeholder="请选择角色"
               />
             </template>
             <template slot="postForm">
               <avue-select
-                v-model="post"
-                multiple
-                placeholder="请选择岗位"
-                :dic="postOptions"
-                :props="postProps"
+                  v-model="post"
+                  multiple
+                  placeholder="请选择岗位"
+                  :dic="postOptions"
+                  :props="postProps"
               ></avue-select>
             </template>
           </avue-crud>
@@ -110,12 +110,12 @@
 </template>
 
 <script>
-import { listPosts } from '@/service/post.js'
-import { addObj, delObj, fetchList, putObj } from '@/service/user.js'
-import { deptRoleList } from '@/service/role.js'
-import { fetchTree } from '@/service/dept.js'
-import { tableOption } from '@/views/admin/user/index.js'
-import { mapGetters } from 'vuex'
+import {listPosts} from '@/service/post.js'
+import {addObj, delObj, fetchList, putObj} from '@/service/user.js'
+import {deptRoleList} from '@/service/role.js'
+import {fetchTree} from '@/service/dept.js'
+import {tableOption} from '@/views/admin/user/index.js'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'SysUser',
@@ -184,27 +184,27 @@ export default {
   methods: {
     init() {
       fetchTree().then(response => {
-        const { data } = response
+        const {data} = response
         this.treeData = data
       })
     },
     nodeClick(data) {
       this.page.page = 1
-      this.getList(this.page, { deptId: data._id })
+      this.getList(this.page, {deptId: data._id})
     },
     getList(page, params) {
       this.listLoading = true
       fetchList(
-        Object.assign(
-          {
-            current: page.currentPage,
-            size: page.pageSize
-          },
-          params,
-          this.searchForm
-        )
+          Object.assign(
+              {
+                current: page.currentPage,
+                size: page.pageSize
+              },
+              params,
+              this.searchForm
+          )
       ).then(response => {
-        const { data, total } = response
+        const {data, total} = response
         this.list = data
         this.page.total = total
         this.listLoading = false
@@ -212,11 +212,11 @@ export default {
     },
     getNodeData() {
       deptRoleList().then(response => {
-        const { data } = response
+        const {data} = response
         this.rolesOptions = data
       })
       listPosts().then(response => {
-        const { data } = response
+        const {data} = response
         this.postOptions = data
       })
     },
@@ -239,17 +239,17 @@ export default {
       window.boxType = type
       // 查询部门树
       fetchTree().then(response => {
-        const { data } = response
+        const {data} = response
         this.treeDeptData = data
       })
       // 查询角色列表
       deptRoleList().then(response => {
-        const { data } = response
+        const {data} = response
         this.rolesOptions = data
       })
       // 查询岗位列表
       listPosts().then(response => {
-        const { data } = response
+        const {data} = response
         this.postOptions = data
       })
       if (['edit', 'view'].includes(type)) {
@@ -279,14 +279,14 @@ export default {
         this.form.phone = undefined
       }
       addObj(this.form)
-        .then(() => {
-          this.getList(this.page)
-          done()
-          this.$notify.success('创建成功')
-        })
-        .catch(() => {
-          loading()
-        })
+          .then(() => {
+            this.getList(this.page)
+            done()
+            this.$notify.success('创建成功')
+          })
+          .catch(() => {
+            loading()
+          })
     },
     update(row, index, done, loading) {
       if (this.form.phone && this.form.phone.indexOf('*') >= 0) {
@@ -296,33 +296,33 @@ export default {
         this.form.password = undefined
       }
       putObj(this.form)
-        .then(() => {
-          this.getList(this.page)
-          done()
-          this.$notify.success('修改成功')
-        })
-        .catch(() => {
-          loading()
-        })
+          .then(() => {
+            this.getList(this.page)
+            done()
+            this.$notify.success('修改成功')
+          })
+          .catch(() => {
+            loading()
+          })
     },
     deletes(row, index) {
       this.$confirm(
-        '此操作将永久删除该用户(用户名:' + row.username + '), 是否继续?',
-        '提示',
-        {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }
+          '此操作将永久删除该用户(用户名:' + row.username + '), 是否继续?',
+          '提示',
+          {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }
       ).then(() => {
         delObj(row._id)
-          .then(() => {
-            this.list.splice(index, 1)
-            this.$notify.success('删除成功')
-          })
-          .catch(() => {
-            this.$notify.error('删除失败')
-          })
+            .then(() => {
+              this.list.splice(index, 1)
+              this.$notify.success('删除成功')
+            })
+            .catch(() => {
+              this.$notify.error('删除失败')
+            })
       })
     }
   }

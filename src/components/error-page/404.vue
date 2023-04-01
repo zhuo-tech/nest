@@ -8,7 +8,8 @@
         <p class="error404-body-con-message">YOU&nbsp;&nbsp;LOOK&nbsp;&nbsp;LOST</p>
         <div class="error404-btn-con">
           <el-button size="large" style="width: 200px;" type="text" @click="goHome">返回首页</el-button>
-          <el-button size="large" style="width: 200px;margin-left: 40px;" type="primary" @click="backPage">返回上一页</el-button>
+          <el-button size="large" style="width: 200px;margin-left: 40px;" type="primary" @click="backPage">返回上一页
+          </el-button>
         </div>
       </el-card>
     </div>

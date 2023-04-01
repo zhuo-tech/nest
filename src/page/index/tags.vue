@@ -1,43 +1,43 @@
 <template>
   <div
-    v-if="showTag"
-    class="avue-tags"
-    @click="contextmenuFlag=false">
+      v-if="showTag"
+      class="avue-tags"
+      @click="contextmenuFlag=false">
     <!-- tag盒子 -->
     <div
-      v-if="contextmenuFlag"
-      :style="{left:contentmenuX+'px',top:contentmenuY+'px'}"
-      class="avue-tags__contentmenu">
+        v-if="contextmenuFlag"
+        :style="{left:contentmenuX+'px',top:contentmenuY+'px'}"
+        class="avue-tags__contentmenu">
       <div
-        class="item"
-        @click="closeOthersTags">关闭其他
+          class="item"
+          @click="closeOthersTags">关闭其他
       </div>
       <div
-        class="item"
-        @click="closeAllTags">关闭全部
+          class="item"
+          @click="closeAllTags">关闭全部
       </div>
     </div>
     <div
-      :class="{'avue-tags__box--close':!website.isFirstPage}"
-      class="avue-tags__box">
+        :class="{'avue-tags__box--close':!website.isFirstPage}"
+        class="avue-tags__box">
       <el-tabs
-        v-model="active"
-        :closable="tagLen!==1"
-        type="card"
-        @contextmenu.native="handleContextmenu"
-        @tab-click="openTag"
-        @edit="menuTag">
+          v-model="active"
+          :closable="tagLen!==1"
+          type="card"
+          @contextmenu.native="handleContextmenu"
+          @tab-click="openTag"
+          @edit="menuTag">
         <el-tab-pane
-          v-for="item in tagList"
-          :key="item.value"
-          :label="item.label"
-          :name="item.value"/>
+            v-for="item in tagList"
+            :key="item.value"
+            :label="item.label"
+            :name="item.value"/>
 
       </el-tabs>
       <el-dropdown class="avue-tags__menu">
         <el-button
-          type="primary"
-          size="mini">
+            type="primary"
+            size="mini">
           更多
           <i class="el-icon-arrow-down el-icon--right"/>
         </el-button>
@@ -51,7 +51,7 @@
   </div>
 </template>
 <script>
-import { mapGetters, mapState } from 'vuex'
+import {mapGetters, mapState} from 'vuex'
 
 export default {
   name: 'Tags',
@@ -115,7 +115,7 @@ export default {
     },
     menuTag(value, action) {
       if (action === 'remove') {
-        const { tag, key } = this.findTag(value)
+        const {tag, key} = this.findTag(value)
         this.$store.commit('DEL_TAG', tag)
         if (tag.value === this.tag.value) {
           const tagToOpen = this.tagList[key === 0 ? key : key - 1] // 如果关闭本标签让前推一个
@@ -151,7 +151,7 @@ export default {
           key = index
         }
       })
-      return { tag: tag, key: key }
+      return {tag: tag, key: key}
     },
     closeAllTags() {
       this.contextmenuFlag = false

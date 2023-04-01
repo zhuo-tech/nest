@@ -1,9 +1,9 @@
 <template>
   <!-- 添加或修改菜单对话框 -->
   <el-dialog
-    :title="!form._id ? '新增': '修改'"
-    :visible.sync="visible"
-    append-to-body>
+      :title="!form._id ? '新增': '修改'"
+      :visible.sync="visible"
+      append-to-body>
     <el-form ref="dataForm" :model="form" :rules="rules" label-width="80px">
       <el-row>
         <el-col :span="12">
@@ -18,11 +18,11 @@
         <el-col :span="12">
           <el-form-item label="上级菜单">
             <treeselect
-              v-model="form.parentId"
-              :options="menuOptions"
-              :normalizer="normalizer"
-              :show-count="true"
-              placeholder="选择上级菜单"
+                v-model="form.parentId"
+                :options="menuOptions"
+                :normalizer="normalizer"
+                :show-count="true"
+                placeholder="选择上级菜单"
             />
           </el-form-item>
         </el-col>
@@ -73,14 +73,14 @@
 </template>
 
 <script>
-import { addObj, getObj, list, putObj } from '@/service/menu.js'
+import {addObj, getObj, list, putObj} from '@/service/menu.js'
 import Treeselect from '@riophae/vue-treeselect'
 import iconList from '@/const/iconList'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 export default {
   name: 'Menu',
-  components: { Treeselect },
+  components: {Treeselect},
   data() {
     return {
       // 遮罩层
@@ -106,19 +106,19 @@ export default {
       // 表单校验
       rules: {
         name: [
-          { required: true, message: '菜单名称不能为空', trigger: 'blur' }
+          {required: true, message: '菜单名称不能为空', trigger: 'blur'}
         ],
         sortOrder: [
-          { required: true, message: '菜单顺序不能为空', trigger: 'blur' }
+          {required: true, message: '菜单顺序不能为空', trigger: 'blur'}
         ],
         path: [
-          { required: true, message: '路由地址不能为空', trigger: 'blur' }
+          {required: true, message: '路由地址不能为空', trigger: 'blur'}
         ],
         keepAlive: [
-          { required: true, message: '路由缓冲不能为空', trigger: 'blur' }
+          {required: true, message: '路由缓冲不能为空', trigger: 'blur'}
         ],
         permission: [
-          { required: true, message: '权限标识不能为空', trigger: 'blur' }
+          {required: true, message: '权限标识不能为空', trigger: 'blur'}
         ]
       }
     }
@@ -171,8 +171,8 @@ export default {
     getTreeselect() {
       list().then(response => {
         this.menuOptions = []
-        const menu = { _id: "-1", name: '根菜单', children: [] }
-        const { data } = response
+        const menu = {_id: "-1", name: '根菜单', children: []}
+        const {data} = response
         menu.children = data
         this.menuOptions.push(menu)
       })

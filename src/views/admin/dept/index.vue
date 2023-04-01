@@ -4,57 +4,57 @@
       <el-form ref="queryForm" :model="queryParams" :inline="true">
         <el-form-item label="部门名称" prop="deptName">
           <el-input
-            v-model="queryParams.deptName"
-            placeholder="请输入部门名称"
-            clearable
-            size="small"
-            @keyup.enter.native="getList"
+              v-model="queryParams.deptName"
+              placeholder="请输入部门名称"
+              clearable
+              size="small"
+              @keyup.enter.native="getList"
           />
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" @click="getList">搜索</el-button>
           <el-button
-            v-if="permissions.sys_menu_add"
-            icon="el-icon-plus"
-            type="primary"
-            @click="addOrUpdateHandle(false)">
+              v-if="permissions.sys_menu_add"
+              icon="el-icon-plus"
+              type="primary"
+              @click="addOrUpdateHandle(false)">
             添加
           </el-button>
         </el-form-item>
       </el-form>
 
       <el-table
-        v-loading="loading"
-        border
-        :data="deptList"
-        row-key="_id"
-        default-expand-all
-        :tree-props="{children: 'children'}">
+          v-loading="loading"
+          border
+          :data="deptList"
+          row-key="_id"
+          default-expand-all
+          :tree-props="{children: 'children'}">
         <el-table-column prop="name" label="部门名称" :show-overflow-tooltip="true"></el-table-column>
         <el-table-column prop="sortOrder" label="排序" align="center"></el-table-column>
         <el-table-column :formatter="formatDate" prop="createTime" label="创建时间" align="center"></el-table-column>
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template v-slot="scope">
             <el-button
-              v-if="permissions.sys_dept_add"
-              size="small"
-              type="text"
-              icon="el-icon-plus"
-              @click="addOrUpdateHandle(false,scope.row._id)">新增
+                v-if="permissions.sys_dept_add"
+                size="small"
+                type="text"
+                icon="el-icon-plus"
+                @click="addOrUpdateHandle(false,scope.row._id)">新增
             </el-button>
             <el-button
-              v-if="permissions.sys_dept_edit"
-              size="small"
-              type="text"
-              icon="el-icon-edit"
-              @click="addOrUpdateHandle(true,scope.row._id)">修改
+                v-if="permissions.sys_dept_edit"
+                size="small"
+                type="text"
+                icon="el-icon-edit"
+                @click="addOrUpdateHandle(true,scope.row._id)">修改
             </el-button>
             <el-button
-              v-if="permissions.sys_dept_del"
-              size="small"
-              type="text"
-              icon="el-icon-delete"
-              @click="handleDelete(scope.row)">删除
+                v-if="permissions.sys_dept_del"
+                size="small"
+                type="text"
+                icon="el-icon-delete"
+                @click="handleDelete(scope.row)">删除
             </el-button>
           </template>
         </el-table-column>
@@ -66,15 +66,15 @@
 </template>
 
 <script>
-import { delObj, fetchTree } from '@/service/dept'
+import {delObj, fetchTree} from '@/service/dept'
 import TableForm from './dept-form'
-import { mapGetters } from 'vuex'
+import {mapGetters} from 'vuex'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 
 export default {
   name: 'Dept',
-  components: { TableForm },
+  components: {TableForm},
   data() {
     return {
       addOrUpdateVisible: false,
@@ -116,7 +116,7 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
+      }).then(function () {
         return delObj(row._id)
       }).then(() => {
         this.getList()

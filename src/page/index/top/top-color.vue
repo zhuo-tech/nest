@@ -1,11 +1,11 @@
 <template>
   <el-color-picker
-    v-model="themeVal"
-    :predefine="predefineColors"
-    size="mini"
-    style="padding-top:18px;"
-    class="theme-picker"
-    popper-class="theme-picker-dropdown"/>
+      v-model="themeVal"
+      :predefine="predefineColors"
+      size="mini"
+      style="padding-top:18px;"
+      class="theme-picker"
+      popper-class="theme-picker-dropdown"/>
 </template>
 
 <script>
