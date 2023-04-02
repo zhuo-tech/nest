@@ -1,0 +1,5 @@
+name: sys-file-upload
+methods:
+  - POST
+tags:
+  - oss

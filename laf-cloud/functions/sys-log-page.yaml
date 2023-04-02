@@ -1,0 +1,6 @@
+name: sys-log-page
+methods:
+  - GET
+  - POST
+tags:
+  - sys

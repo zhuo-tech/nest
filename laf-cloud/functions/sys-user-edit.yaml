@@ -1,0 +1,6 @@
+name: sys-user-edit
+methods:
+  - GET
+  - POST
+tags:
+  - rbac

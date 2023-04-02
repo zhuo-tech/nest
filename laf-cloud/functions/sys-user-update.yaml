@@ -1,0 +1,5 @@
+name: sys-user-update
+methods:
+  - POST
+tags:
+  - rbac

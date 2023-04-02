@@ -1,0 +1,5 @@
+name: sys-user-login
+methods:
+  - POST
+tags:
+  - auth
