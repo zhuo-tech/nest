@@ -110,10 +110,10 @@
 </template>
 
 <script>
-import {listPosts} from '@/service/post.js'
-import {addObj, delObj, fetchList, putObj} from '@/service/user.js'
-import {deptRoleList} from '@/service/role.js'
-import {fetchTree} from '@/service/dept.js'
+import {listPosts} from '@/service/post.service.js'
+import {addObj, delObj, fetchList, putObj} from '@/service/user.service.js'
+import {deptRoleList} from '@/service/role.service.js'
+import {fetchTree} from '@/service/dept.service.js'
 import {tableOption} from '@/views/admin/user/index.js'
 import {mapGetters} from 'vuex'
 

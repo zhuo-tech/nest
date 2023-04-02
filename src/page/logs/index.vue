@@ -7,12 +7,6 @@
       @size-change="sizeChange">
     <template slot="menuLeft">
       <el-button
-          type="primary"
-          size="small"
-          icon="el-icon-upload"
-          @click="send">上传服务器
-      </el-button>
-      <el-button
           type="danger"
           size="small"
           icon="el-icon-delete"
@@ -81,20 +75,6 @@ export default {
         this.list = this.logsList.slice((currentPage - 1) * pageSize, currentPage * pageSize)
         this.page.total = total
       }
-    },
-    send() {
-      this.$confirm('确定上传本地日志到服务器?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.$store.dispatch('SendLogs').then(() => {
-          this.$parent.$parent.box = false
-          this.$message.success('发送成功!')
-        })
-      }).catch(() => {
-
-      })
     },
     clear() {
       this.$confirm('确定清空本地日志记录?', '提示', {

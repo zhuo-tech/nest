@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import {delObj, fetchTree} from '@/service/dept'
+import {delObj, fetchTree} from '@/service/dept.service'
 import TableForm from './dept-form'
 import {mapGetters} from 'vuex'
 import dayjs from 'dayjs'

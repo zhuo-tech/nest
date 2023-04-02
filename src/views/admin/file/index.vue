@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import {delObj, fetchList} from '@/service/file.js'
+import {delObj, fetchList} from '@/service/file.service.js'
 import {tableOption} from '@/views/admin/file/index.js'
 import {mapGetters} from 'vuex'
 import {OSS_ENDPOINT} from "@/cloud";

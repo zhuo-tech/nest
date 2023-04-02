@@ -1,9 +1,9 @@
 import {getStore, setStore} from '@/util/store'
 import {isURL, validatenull} from '@/util/validate'
-import {getUserInfo, loginByUsername, logout} from '@/func'
+import {getUserInfo, loginByUsername, logout} from '@/auth'
 import {deepClone} from '@/util'
 import website from '@/const/website'
-import {getMenu, getTopMenu} from '@/service/menu'
+import {getMenu, getTopMenu} from '@/service/menu.service'
 
 function addPath(ele, first) {
     const menu = website.menu

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import DataDict from '@/util/dict'
-import {remote} from '@/service/dict'
+import {remote} from '@/service/dict.service'
 
 function install() {
     Vue.use(DataDict, {

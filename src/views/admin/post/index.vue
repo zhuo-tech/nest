@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import {addObj, delObj, fetchList, putObj} from '@/service/post.js'
+import {addObj, delObj, fetchList, putObj} from '@/service/post.service.js'
 import {tableOption} from '@/views/admin/post/index.js'
 import {mapGetters} from 'vuex'
 

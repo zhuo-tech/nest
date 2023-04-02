@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import {delObj, list} from '@/service/menu'
+import {delObj, list} from '@/service/menu.service'
 import TableForm from './menu-form'
 import {mapGetters} from 'vuex'
 

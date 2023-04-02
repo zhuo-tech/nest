@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import {addObj, fetchTree, getObj, putObj} from '@/service/dept.js'
+import {addObj, fetchTree, getObj, putObj} from '@/service/dept.service.js'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
