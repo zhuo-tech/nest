@@ -32,11 +32,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import {delObjs, fetchList} from '@/service/log.service.js'
-=======
-import {delObjs, fetchList} from '@/service/log.js'
->>>>>>> origin/main
 import {tableOption} from '@/views/admin/log/index.js'
 import {mapGetters} from 'vuex'
 
@@ -104,9 +100,6 @@ export default {
     refreshChange() {
       this.getList(this.page)
     },
-    exportExcel() {
-      this.downBlobFile('/admin/log/export', this.searchForm, 'log.xlsx')
-    }
   }
 }
 </script>
