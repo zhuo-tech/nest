@@ -47,11 +47,18 @@ module.exports = {
     disableHostCheck: true,
     port: 8080,
     proxy: {
-      '/': {
+      '/func': {
         target: 'https://cflg6f.laf.dev',
         ws: false, // 需要websocket 开启
         pathRewrite: {
           '^/func': '/'
+        },
+      },
+      '/oss': {
+        target: 'https://cflg6f-nest.oss.laf.dev',
+        ws: false, // 需要websocket 开启
+        pathRewrite: {
+          '^/oss': '/'
         },
       }
     }

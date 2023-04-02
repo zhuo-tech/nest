@@ -1,4 +1,4 @@
-# 微草轻课
+# Laf快速开发平台
 基于laf开发的`快速开发平台`创作平台
 
 # 技术选型
@@ -43,7 +43,7 @@
     ├    ├── cache.js -- 缓存
     ├    ├── cloud.js -- Laf云开发集成
     ├    ├── error.js -- 错误状态码
-    ├    ├── main.ts -- 入口
+    ├    ├── main.js -- 入口
     ├    ├── permission.js - 权限
     ├── .gitignore  -- 忽略配置
     ├── babel.config.js

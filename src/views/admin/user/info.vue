@@ -18,7 +18,7 @@
                       :show-file-list="false"
                       :on-success="handleAvatarSuccess"
                       class="avatar-uploader"
-                      action="/admin/sys-file/upload"
+                      action="/func/sys-file-upload"
                   >
                     <img v-if="ruleForm.avatar" id="avatar" :src="avatarUrl" class="avatar" alt="头像"/>
                     <i v-else class="el-icon-plus avatar-uploader-icon"/>
@@ -161,11 +161,11 @@ export default {
       this.ruleForm.nickname = this.userInfo.nickname
       this.ruleForm.name = this.userInfo.name
       this.ruleForm.email = this.userInfo.email
-      handleImg(this.userInfo.avatar, 'avatar')
+      handleImg('/oss/' + this.userInfo.avatar, 'avatar')
     },
     handleAvatarSuccess(res, file) {
       this.avatarUrl = URL.createObjectURL(file.raw)
-      this.ruleForm.avatar = res.data.url
+      this.ruleForm.avatar = res.data.fileName
     }
   }
 }
