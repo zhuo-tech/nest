@@ -6,10 +6,14 @@ const DB_NAME = {
 }
 
 export async function fetchTree(query) {
-    console.debug('Dept[fetchTree] request param')
+    console.debug('Dept[fetchTree] request query->', query)
+    const qo = {}
+    if (query && query.deptName) {
+        qo.name = new RegExp(`.*${query.deptName}.*`)
+    }
     const {data, ok} = await DB.collection(DB_NAME.SYS_DEPT)
-        .where({})
         .orderBy('sortOrder', 'asc')
+        .where(qo)
         .get()
     const tree = buildTree(data)
     const res = {

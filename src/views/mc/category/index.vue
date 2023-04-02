@@ -2,10 +2,10 @@
   <basic-container>
     <div class="avue-crud">
       <el-form ref="queryForm" :model="queryParams" :inline="true">
-        <el-form-item label="部门名称" prop="deptName">
+        <el-form-item label="分类名称" prop="categoryName">
           <el-input
-              v-model="queryParams.deptName"
-              placeholder="请输入部门名称"
+              v-model="queryParams.categoryNme"
+              placeholder="请输入分类名称"
               clearable
               size="small"
               @keyup.enter.native="getList"
@@ -14,7 +14,7 @@
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" @click="getList">搜索</el-button>
           <el-button
-              v-if="permissions.sys_dept_add"
+              v-if="permissions.mc_category_add"
               icon="el-icon-plus"
               type="primary"
               @click="addOrUpdateHandle(false)">
@@ -26,31 +26,31 @@
       <el-table
           v-loading="loading"
           border
-          :data="deptList"
+          :data="categoryList"
           row-key="_id"
           default-expand-all
           :tree-props="{children: 'children'}">
-        <el-table-column prop="name" label="部门名称" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column prop="name" label="分类名称" :show-overflow-tooltip="true"></el-table-column>
         <el-table-column prop="sortOrder" label="排序" align="center"></el-table-column>
         <el-table-column :formatter="formatDate" prop="createTime" label="创建时间" align="center"></el-table-column>
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template v-slot="scope">
             <el-button
-                v-if="permissions.sys_dept_add"
+                v-if="permissions.mc_category_add"
                 size="small"
                 type="text"
                 icon="el-icon-plus"
                 @click="addOrUpdateHandle(false,scope.row._id)">新增
             </el-button>
             <el-button
-                v-if="permissions.sys_dept_edit"
+                v-if="permissions.mc_category_edit"
                 size="small"
                 type="text"
                 icon="el-icon-edit"
                 @click="addOrUpdateHandle(true,scope.row._id)">修改
             </el-button>
             <el-button
-                v-if="permissions.sys_dept_del"
+                v-if="permissions.mc_category_del"
                 size="small"
                 type="text"
                 icon="el-icon-delete"
@@ -66,8 +66,8 @@
 </template>
 
 <script>
-import {delObj, fetchTree} from '@/service/sys.dept.service'
-import TableForm from './dept-form'
+import {delObj, fetchTree} from '@/service/mc.category.service.js'
+import TableForm from './category-form'
 import {mapGetters} from 'vuex'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
@@ -81,10 +81,10 @@ export default {
       // 遮罩层
       loading: true,
       //表格树数据
-      deptList: [],
+      categoryList: [],
       // 查询参数
       queryParams: {
-        deptName: ''
+        categoryNme: ''
       }
     }
   },
@@ -107,7 +107,7 @@ export default {
     getList() {
       this.loading = true
       fetchTree(this.queryParams).then(response => {
-        this.deptList = response.data
+        this.categoryList = response.data
         this.loading = false
       })
     },

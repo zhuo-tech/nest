@@ -92,10 +92,10 @@
 </template>
 
 <script>
-import {addObj, delObj, fetchList, fetchMenuIdsByRoleId, permissionUpd, putObj} from '@/service/role.service.js'
+import {addObj, delObj, fetchList, fetchMenuIdsByRoleId, permissionUpd, putObj} from '@/service/sys.role.service.js'
 import {tableOption} from '@/views/admin/role/index.js'
-import {fetchTree} from '@/service/dept.service.js'
-import {list} from '@/service/menu.service.js'
+import {fetchTree} from '@/service/sys.dept.service.js'
+import {list} from '@/service/sys.menu.service.js'
 import {mapGetters} from 'vuex'
 
 export default {

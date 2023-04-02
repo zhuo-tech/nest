@@ -1,4 +1,5 @@
 import {cloud} from "@/cloud"
+import qs from 'qs'
 
 const DB = cloud.database()
 const CMD = DB.command
@@ -215,4 +216,22 @@ async function getUserAttrs(users) {
         }
     }
     return users
+}
+
+export const getUserInfo = async () => {
+    return await cloud.invokeFunction('sys-user-info', {})
+}
+
+
+export const loginByUsername = async (username, password) => {
+    const param = qs.parse({username: username, password: password})
+    const res = await cloud.invokeFunction(
+        'sys-user-login',
+        param
+    )
+    return res
+}
+
+export const logout = async () => {
+    return {"code": 0, "msg": 'success', "data": true}
 }

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {addObj, delObj, fetchList, putObj} from '@/service/social.service.js'
+import {addObj, delObj, fetchList, putObj} from '@/service/sys.social.service.js'
 import {tableOption} from '@/views/admin/social/index.js'
 import {mapGetters} from 'vuex'
 

@@ -1,4 +1,4 @@
-import {remote} from '@/service/dict.service.js'
+import {remote} from '@/service/sys.dict.service.js'
 
 const validateDict = (rule, value, callback) => {
     remote(value).then(response => {

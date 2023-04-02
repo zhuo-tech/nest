@@ -1,4 +1,4 @@
-import {getObj} from '@/service/social.service'
+import {getObj} from '@/service/sys.social.service'
 
 var validateSocial = (rule, value, callback) => {
     getObj(value).then(response => {

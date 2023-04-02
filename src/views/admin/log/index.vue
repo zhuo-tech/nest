@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import {delObjs, fetchList} from '@/service/log.service.js'
+import {delObjs, fetchList} from '@/service/sys.log.service.js'
 import {tableOption} from '@/views/admin/log/index.js'
 import {mapGetters} from 'vuex'
 

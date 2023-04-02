@@ -7,19 +7,19 @@
     <el-form ref="dataForm" :model="form" :rules="rules" label-width="80px">
       <el-row>
         <el-col>
-          <el-form-item label="上级部门">
+          <el-form-item label="上级分类">
             <treeselect
                 v-model="form.parentId"
-                :options="deptOptions"
+                :options="categoryOptions"
                 :normalizer="normalizer"
                 :show-count="true"
-                placeholder="选择上级部门"
+                placeholder="选择上级分类"
             />
           </el-form-item>
         </el-col>
       </el-row>
-      <el-form-item label="部门名称" prop="name">
-        <el-input v-model="form.name" placeholder="请输入部门名称"/>
+      <el-form-item label="分类名称" prop="name">
+        <el-input v-model="form.name" placeholder="请输入分类名称"/>
       </el-form-item>
       <el-form-item label="排序" prop="sortOrder">
         <el-input-number v-model="form.sortOrder" controls-position="right" :min="0"/>
@@ -33,19 +33,19 @@
 </template>
 
 <script>
-import {addObj, fetchTree, getObj, putObj} from '@/service/sys.dept.service.js'
+import {addObj, fetchTree, getObj, putObj} from '@/service/mc.category.service.js'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 export default {
-  name: 'DeptForm',
+  name: 'McCategoryForm',
   components: {Treeselect},
   data() {
     return {
       // 遮罩层
       loading: true,
-      // 部门树选项
-      deptOptions: [],
+      // 分类树选项
+      categoryOptions: [],
       // 是否显示弹出层
       visible: false,
       form: {
@@ -55,10 +55,10 @@ export default {
       // 表单校验
       rules: {
         name: [
-          {required: true, message: '部门名称不能为空', trigger: 'blur'}
+          {required: true, message: '分类名称不能为空', trigger: 'blur'}
         ],
         sortOrder: [
-          {required: true, message: '部门顺序不能为空', trigger: 'blur'}
+          {required: true, message: '分类顺序不能为空', trigger: 'blur'}
         ]
       }
     }
@@ -77,7 +77,7 @@ export default {
             this.form = response.data
           })
         } else {
-          this.form.deptId = undefined
+          this.form.categoryId = undefined
         }
       })
     },
@@ -104,20 +104,19 @@ export default {
         }
       })
     },
-    /** 查询部门下拉树结构 */
+    /** 查询素材分类下拉树结构 */
     getTreeselect() {
       fetchTree().then(response => {
-        this.deptOptions = []
-        const dept = {_id: "0", name: '根部门', children: response.data}
-        this.deptOptions.push(dept)
+        this.categoryOptions = []
+        const category = {_id: "0", name: '根分类', children: response.data}
+        this.categoryOptions.push(category)
       })
     },
-    /** 转换部门数据结构 */
+    /** 转换素材分类数据结构 */
     normalizer(node) {
       if (node.children && !node.children.length) {
         delete node.children
       }
-
       return {
         id: node._id,
         label: node.name,

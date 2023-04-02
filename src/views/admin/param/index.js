@@ -1,6 +1,6 @@
 import {rule} from '@/util/validateRules'
 
-import {getObj} from '@/service/param.service'
+import {getObj} from '@/service/sys.param.service'
 
 
 const validateParam = (rule, value, callback) => {

@@ -40,7 +40,6 @@
 	├    ├──     └── social -- 社交管理
 	├    ├──     └── user -- 账号管理
     ├    ├── App.vue -- vue
-    ├    ├── auth.js -- 授权登录
     ├    ├── cache.js -- 缓存
     ├    ├── cloud.js -- Laf云开发集成
     ├    ├── error.js -- 错误状态码
