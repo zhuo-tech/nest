@@ -32,7 +32,11 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import {delObjs, fetchList} from '@/service/log.service.js'
+=======
+import {delObjs, fetchList} from '@/service/log.js'
+>>>>>>> origin/main
 import {tableOption} from '@/views/admin/log/index.js'
 import {mapGetters} from 'vuex'
 
