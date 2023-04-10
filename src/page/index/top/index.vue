@@ -144,7 +144,9 @@ export default {
   },
   watch: {
     userInfo() {
-      handleImg("/oss/" + this.userInfo.avatar, 'thumbnail')
+      if(this.userInfo.avatar){
+        handleImg("/oss/" + this.userInfo.avatar, 'thumbnail')
+      }
     }
   },
   mounted() {
