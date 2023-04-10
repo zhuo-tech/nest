@@ -19,7 +19,6 @@ import * as filters from './filters' // 全局filter
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './styles/common.scss'
-import AvueFormDesign from 'pig-avue-form-design'
 import basicContainer from './components/basic-container/main'
 // 字典数据组件
 import DictResolver from '@/components/DictResolver'
@@ -35,8 +34,6 @@ DictResolver.install()
 
 // 插件 json 展示
 Vue.use(router)
-// 表单设计器
-Vue.use(AvueFormDesign)
 
 window.axios = axios
 Vue.use(VueAxios, axios)
