@@ -1,6 +1,6 @@
 import {getStore, setStore} from '@/util/store'
 import {isURL, validatenull} from '@/util/validate'
-import {getUserInfo, loginByUsername, logout} from '@/service/user.service.js'
+import {getUserInfo, loginByUsername, logout} from '@/service/sys.user.service.js'
 import {deepClone} from '@/util'
 import website from '@/const/website'
 import {getMenu, getTopMenu} from '@/service/sys.menu.service'

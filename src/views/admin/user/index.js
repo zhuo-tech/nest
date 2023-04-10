@@ -1,4 +1,4 @@
-import {getDetails, getDetailsByPhone} from '@/service/user.service.js'
+import {getDetails, getDetailsByPhone} from '@/service/sys.user.service.js'
 
 
 const validateUsername = (rule, value, callback) => {
