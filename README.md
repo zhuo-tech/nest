@@ -69,3 +69,26 @@
   4. [x] 日志管理
   
 # 预览
+`登录`
+![image](https://user-images.githubusercontent.com/11770232/230906126-7e9c0e8c-e5e8-47f1-ac5e-ef35a5e49e50.png)
+`首页`
+![image](https://user-images.githubusercontent.com/11770232/230906248-dcf59a4c-0f67-466b-b088-ee9cef38024e.png)
+`权限管理`
+![image](https://user-images.githubusercontent.com/11770232/230906357-be0293e0-e12b-4d48-9a7f-1ce5db4288a7.png)
+![image](https://user-images.githubusercontent.com/11770232/230906407-b8791942-18bc-4894-b648-468c4e4f90a3.png)
+![image](https://user-images.githubusercontent.com/11770232/230906438-9f50f67b-f020-485d-856c-acc7a9dbfc6d.png)
+`组织机构`
+![image](https://user-images.githubusercontent.com/11770232/230906491-74232d2e-476a-45d7-a46e-9f3849264aa2.png)
+![image](https://user-images.githubusercontent.com/11770232/230906542-d1021f48-c991-4d68-8053-3e7506d88dbf.png)
+`系统管理`
+![image](https://user-images.githubusercontent.com/11770232/230906627-3f76440d-099b-49cd-bf42-d035100e0816.png)
+![image](https://user-images.githubusercontent.com/11770232/230906770-4acda25e-f2c0-4cbf-a660-c492a0fa0eef.png)
+![image](https://user-images.githubusercontent.com/11770232/230906802-132e9a4a-bb43-44ab-a35c-f4a9173b7555.png)
+![image](https://user-images.githubusercontent.com/11770232/230906845-f01bb23c-87fb-47d3-b7be-982b35e10936.png)
+`个人中心`
+![image](https://user-images.githubusercontent.com/11770232/230907202-59da9ace-0f47-4644-ab40-9950147d1ee8.png)
+
+
+
+
+
