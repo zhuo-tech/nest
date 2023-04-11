@@ -1,16 +1,11 @@
 # Laf快速开发平台
-
 基于laf开发的`快速开发平台`
 
 # 技术选型
-
-## [lafyun](https://www.lafyun.com)
-
-`Life is short, you need laf :) 像写博客一样写函数，随手上线`
-`Vue 2`
+-  [laf](https://github.com/labring/laf) `是云开发平台，提供云函数、云数据库、云存储等开箱即用的应用资源。让开发者快速释放创意。ChatGPT 自动写函数，秒级上线，世界上只有两种 serverless，30 秒上线的 和 30 秒劝退的！`
+- `Vue2` `elementui` `avue`
 
 # 模块说明
-
     nest
     ├── env -- 环境配置
     ├── public   -- 资源目录
@@ -55,25 +50,24 @@
     ├── package.json
     ├── vue.config.js
 
-# 功能
 
+# 功能
 - [x] 登录授权
 - [x] 权限管理
     1. [x] 用户管理
     2. [x] 角色管理
     3. [x] 菜单管理
 - [x] 组织管理
-    1. [x] 部门管理
-    2. [x] 岗位管理
+   1. [x] 部门管理
+   2. [x] 岗位管理
 
 - [x] 系统管理
-    1. [x] 参数管理
-    2. [x] 字典管理
-    3. [x] 文件管理
-    4. [x] 日志管理
-
+  1. [x] 参数管理
+  2. [x] 字典管理
+  3. [x] 文件管理
+  4. [x] 日志管理
+  
 # 预览
-
 `登录`
 ![image](https://user-images.githubusercontent.com/11770232/230906126-7e9c0e8c-e5e8-47f1-ac5e-ef35a5e49e50.png)
 `首页`
