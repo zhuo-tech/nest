@@ -1,5 +1,5 @@
 # Laf快速开发平台
-基于laf开发的`快速开发平台`平台
+基于laf开发的`快速开发平台`
 
 # 技术选型
 ## [lafyun](https://www.lafyun.com)
