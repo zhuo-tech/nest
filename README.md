@@ -2,9 +2,8 @@
 基于laf开发的`快速开发平台`
 
 # 技术选型
-## [lafyun](https://www.lafyun.com)
-`Life is short, you need laf :) 像写博客一样写函数，随手上线`
-`Vue 2`
+-  [laf](https://github.com/labring/laf) `laf 是云开发平台，提供云函数、云数据库、云存储等开箱即用的应用资源。让开发者快速释放创意。ChatGPT 自动写函数，秒级上线，世界上只有两种 serverless，30 秒上线的 和 30 秒劝退的！`
+- `Vue2` `elementui` `avue`
 
 # 模块说明
     nest
