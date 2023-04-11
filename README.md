@@ -88,6 +88,18 @@
 ![image](https://user-images.githubusercontent.com/11770232/230907202-59da9ace-0f47-4644-ab40-9950147d1ee8.png)
 
 
-
-
+## 🚀 Quick Start
+- 初始化
+  > 说明:
+  > - 替换自己的应用
+  > - [laf-assistant](https://forum.laf.run/d/67) 同步云函数
+  > - 执行初始化数据函数 `init-collection-data`
+- 安装依赖
+  ``` js
+    npm i
+  ```
+- 启动
+  ``` js 
+  npm run dev
+  ```
 
