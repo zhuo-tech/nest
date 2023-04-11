@@ -1,0 +1,5 @@
+name: lite-sign-up
+methods:
+  - POST
+tags:
+  - lite

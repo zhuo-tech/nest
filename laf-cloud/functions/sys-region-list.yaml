@@ -1,0 +1,5 @@
+name: sys-region-list
+methods:
+  - GET
+tags:
+  - sys

@@ -1,0 +1,6 @@
+name: Demo
+methods:
+  - GET
+  - POST
+tags:
+  - test

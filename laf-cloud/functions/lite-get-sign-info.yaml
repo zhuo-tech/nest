@@ -1,0 +1,5 @@
+name: lite-get-sign-info
+methods:
+  - GET
+tags:
+  - lite

@@ -5,35 +5,108 @@ const DB = cloud.database()
 
 const DB_NAME = {
     SYS_USER: 'sys_user',
+    SYS_ROLE: 'sys_role',
+    SYS_MENU: 'sys_menu',
+    SYS_ROLE_MENU: 'sys_role_menu',
+    SYS_USER_ROLE: 'sys_user_role'
 }
 
 interface UserDetails {
     userId: string
     type: string
-    exp: number
+    expires_in: number,
+    active: boolean,
+    clientId: string
+    license: string,
+    scope: string,
+    token_type: string
+}
+
+interface Permission {
+    permission: string
+}
+
+interface Role {
+    roleId: string
+}
+
+interface Menu {
+    menuId: string
 }
 
 export async function main(ctx: FunctionContext) {
-    const {username, password} = ctx.body
+    const { username, password } = ctx.body
     if (!username || !password) {
         return R.failed('参数不合法')
     }
-    const {data: user} = await DB.collection(DB_NAME.SYS_USER)
-        .where({username})
+    const { data: user } = await DB.collection(DB_NAME.SYS_USER)
+        .where({ username })
         .getOne()
     if (!user) {
         console.log('用户名密码错误: ', username)
         return R.failed('用户名密码错误')
     }
-    console.log(user.password)
     if (!PasswordTool.check(password, user.password)) {
         console.log('密码错误')
         return R.failed('用户名或密码错误')
     }
+    // user auth
+    let roles = await selectUserRoleByUserId(user._id)
+    if (!roles) {
+        return R.failed('暂无权限', 401)
+    }
+    roles = roles.map(
+        (role: Role) => role.roleId
+    )
+    let permissions = await selectUserPermissionByRoleIds(roles)
+    if (!permissions) {
+        return R.failed('暂无权限', 401)
+    }
+    permissions = permissions.map(
+        (item: Permission) => item.permission
+    )
     // 签发 token
     const token = new JwtToken(user._id, 'admin')
+    const authorities = []
+    for (const item of roles.map((role: Role) => "ROLE_" + role.roleId).concat(permissions)) {
+        const authority = { authority: item }
+        authorities.push(authority)
+    }
+    const user_info = { ...user, authorities }
+    const data = token.view()
+    const res = {
+        ...data,
+        username,
+        id: user._id,
+        user: user_info
+    }
+    return R.ok(res)
+}
 
-    return R.ok(token.view())
+async function selectUserRoleByUserId(userId: string) {
+    const { data: roles } = await DB.collection(DB_NAME.SYS_USER_ROLE)
+        .where({ userId: userId })
+        .get()
+    return roles
+}
+
+async function selectUserPermissionByRoleIds(roleIds: string[]) {
+    const cmd = DB.command
+    const { data: rolePermissions } = await DB.collection(DB_NAME.SYS_ROLE_MENU)
+        .where({ roleId: cmd.in(roleIds) })
+        .get()
+    const menuIds = rolePermissions.map(
+        (menu: Menu) => menu.menuId
+    )
+    const { data: permissions } = await DB.collection(DB_NAME.SYS_MENU)
+        .where({ _id: cmd.in(menuIds) })
+        .get()
+    const codes = permissions.filter(item => {
+        if (item.permission) {
+            return item.permission
+        }
+    })
+    return codes
 }
 
 class JwtToken {
@@ -53,11 +126,20 @@ class JwtToken {
     }
 
     private static getPayload(uid: string, type: string): UserDetails {
-        return {userId: uid, type: type, exp: JwtToken.expire}
+        return {
+            userId: uid,
+            type: type,
+            expires_in: JwtToken.expire,
+            active: true,
+            clientId: type,
+            license: 'made by gms',
+            scope: 'server',
+            token_type: 'bearer'
+        }
     }
 
     public view() {
-        return {...this.payload, access_token: this.accessToken}
+        return { ...this.payload, access_token: this.accessToken }
     }
 
 }
