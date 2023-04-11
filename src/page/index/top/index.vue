@@ -109,7 +109,6 @@ import topTheme from './top-theme'
 import topLogs from './top-logs'
 import topColor from './top-color'
 import topSetting from './top-setting'
-import {OSS_ENDPOINT} from "@/cloud";
 
 export default {
   name: 'Top',
@@ -144,7 +143,7 @@ export default {
   },
   watch: {
     userInfo() {
-      if(this.userInfo.avatar){
+      if (this.userInfo.avatar) {
         handleImg("/oss/" + this.userInfo.avatar, 'thumbnail')
       }
     }

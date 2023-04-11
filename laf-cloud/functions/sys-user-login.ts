@@ -14,11 +14,11 @@ interface UserDetails {
 }
 
 export async function main(ctx: FunctionContext) {
-    const { username, password } = ctx.body
+    const {username, password} = ctx.body
     if (!username || !password) {
         return R.failed('参数不合法')
     }
-    const { data: user } = await DB.collection(DB_NAME.SYS_USER)
+    const {data: user} = await DB.collection(DB_NAME.SYS_USER)
         .where({username})
         .getOne()
     if (!user) {
@@ -53,11 +53,11 @@ class JwtToken {
     }
 
     private static getPayload(uid: string, type: string): UserDetails {
-        return { userId: uid, type: type, exp: JwtToken.expire }
+        return {userId: uid, type: type, exp: JwtToken.expire}
     }
 
     public view() {
-        return { ...this.payload, access_token: this.accessToken }
+        return {...this.payload, access_token: this.accessToken}
     }
 
 }
