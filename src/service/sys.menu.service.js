@@ -1,7 +1,7 @@
 import {cloud} from "@/cloud"
 
 const DB = cloud.database()
-const DB_NAME = {
+const COLLECTION = {
     SYS_USER: 'sys_user',
     SYS_ROLE: 'sys_role',
     SYS_MENU: 'sys_menu',
@@ -32,7 +32,7 @@ export async function getTopMenu() {
  */
 export async function list() {
     console.debug('Menu[list] request param')
-    const {data, ok} = await DB.collection(DB_NAME.SYS_MENU)
+    const {data, ok} = await DB.collection(COLLECTION.SYS_MENU)
         .where({})
         .orderBy('sortOrder', 'asc')
         .get()
@@ -57,7 +57,7 @@ export async function addObj(obj) {
         ...obj,
         createTine: Date.now()
     }
-    const res = await DB.collection(DB_NAME.SYS_MENU)
+    const res = await DB.collection(COLLECTION.SYS_MENU)
         .add(data)
     console.debug('Menu[addObj] result->', res)
     return res
@@ -65,7 +65,7 @@ export async function addObj(obj) {
 
 export async function getObj(id) {
     console.debug('Menu[getObj] request param id->', id)
-    const res = await DB.collection(DB_NAME.SYS_MENU)
+    const res = await DB.collection(COLLECTION.SYS_MENU)
         .where({_id: id})
         .getOne()
     console.debug('Menu[getObj] result->', res)
@@ -74,7 +74,7 @@ export async function getObj(id) {
 
 export async function delObj(id) {
     console.debug('Menu[delObj] request param id->', id)
-    const res = await DB.collection(DB_NAME.SYS_MENU)
+    const res = await DB.collection(COLLECTION.SYS_MENU)
         .where({_id: id})
         .remove()
     console.debug('Menu[delObj] result->', res)
@@ -91,7 +91,7 @@ export async function putObj(obj) {
     }
     // 不可更新主键
     delete data._id
-    const res = await DB.collection(DB_NAME.SYS_MENU)
+    const res = await DB.collection(COLLECTION.SYS_MENU)
         .doc(id)
         .update(data)
     console.debug('Menu[putObj] result->', res)

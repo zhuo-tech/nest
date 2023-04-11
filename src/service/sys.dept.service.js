@@ -1,7 +1,7 @@
 import {cloud} from "@/cloud"
 
 const DB = cloud.database()
-const DB_NAME = {
+const COLLECTION = {
     SYS_DEPT: 'sys_dept'
 }
 
@@ -11,7 +11,7 @@ export async function fetchTree(query) {
     if (query && query.deptName) {
         qo.name = new RegExp(`.*${query.deptName}.*`)
     }
-    const {data, ok} = await DB.collection(DB_NAME.SYS_DEPT)
+    const {data, ok} = await DB.collection(COLLECTION.SYS_DEPT)
         .orderBy('sortOrder', 'asc')
         .where(qo)
         .get()
@@ -31,7 +31,7 @@ export async function addObj(obj) {
         updateTime: Date.now(),
         createTime: Date.now()
     }
-    const res = await DB.collection(DB_NAME.SYS_DEPT)
+    const res = await DB.collection(COLLECTION.SYS_DEPT)
         .add(o)
     console.log('Dept[addObj] response result->', res)
 }
@@ -42,7 +42,7 @@ export async function addObj(obj) {
  */
 export async function getObj(id) {
     console.log('Dept[getObj] request param ID->', id)
-    const res = await DB.collection(DB_NAME.SYS_DEPT).where({
+    const res = await DB.collection(COLLECTION.SYS_DEPT).where({
         _id: id
     }).getOne()
     console.log('Dept[getObj] response result->', res)
@@ -51,7 +51,7 @@ export async function getObj(id) {
 
 export async function delObj(id) {
     console.log('Dept[delObj] request param ID->', id)
-    const res = await DB.collection(DB_NAME.SYS_DEPT).where({
+    const res = await DB.collection(COLLECTION.SYS_DEPT).where({
         _id: id
     }).remove()
     console.log('Dept[delObj] response result->', res)
@@ -68,7 +68,7 @@ export async function putObj(obj) {
     }
     // 不可更新主键
     delete data._id
-    const res = await DB.collection(DB_NAME.SYS_DEPT)
+    const res = await DB.collection(COLLECTION.SYS_DEPT)
         .doc(id)
         .update(data)
     console.debug('Dept[putObj] result->', res)

@@ -2,7 +2,7 @@ import {cloud} from "@/cloud"
 import {R} from "@/util/R"
 
 const DB = cloud.database()
-const DB_NAME = {
+const COLLECTION = {
     SYS_PARAM: 'sys_param'
 }
 
@@ -18,12 +18,12 @@ export async function fetchList(query) {
         qo.systemFlag = systemFlag
     }
     const res = await DB
-        .collection(DB_NAME.SYS_PARAM)
+        .collection(COLLECTION.SYS_PARAM)
         .where(qo)
         .skip(size * (current - 1))
         .limit(size)
         .get()
-    const {total} = await DB.collection(DB_NAME.SYS_PARAM)
+    const {total} = await DB.collection(COLLECTION.SYS_PARAM)
         .where(qo)
         .count()
     console.debug('分页查询结果: ', res.data)
@@ -44,7 +44,7 @@ export async function addObj(obj) {
         updateTime: Date.now(),
         delFlag: '0'
     }
-    const r = await DB.collection(DB_NAME.SYS_PARAM).add(o)
+    const r = await DB.collection(COLLECTION.SYS_PARAM).add(o)
     console.debug('Param[addObj] result->', r)
     return r
 }
@@ -52,7 +52,7 @@ export async function addObj(obj) {
 export async function getObj(key) {
     console.debug('Param[getObj] result->', key)
     const {data: param, ok} = await DB
-        .collection(DB_NAME.SYS_PARAM)
+        .collection(COLLECTION.SYS_PARAM)
         .where({publicKey: key})
         .getOne()
     if (!param) {
@@ -70,7 +70,7 @@ export async function getObj(key) {
 
 export async function delObj(id) {
     console.log('Param[delObj] request param ID->', id)
-    const res = await DB.collection(DB_NAME.SYS_PARAM).where({
+    const res = await DB.collection(COLLECTION.SYS_PARAM).where({
         _id: id
     }).remove()
     console.log('Param[delObj] response result->', res)
@@ -80,7 +80,7 @@ export async function delObj(id) {
 export async function putObj(obj) {
     console.debug('Param[putObj] request param query->', obj)
     const {_id: id, systemFlag} = obj
-    const {data: param} = await DB.collection(DB_NAME.SYS_PARAM)
+    const {data: param} = await DB.collection(COLLECTION.SYS_PARAM)
         .where({_id: id})
         .getOne()
     if (!param) {
@@ -97,7 +97,7 @@ export async function putObj(obj) {
     }
     console.debug('Param[putObj] data->', data)
     delete data._id
-    const res = await DB.collection(DB_NAME.SYS_PARAM)
+    const res = await DB.collection(COLLECTION.SYS_PARAM)
         .doc(id)
         .update(data)
     console.debug('Param[putObj] result->', res)

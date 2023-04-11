@@ -1,14 +1,14 @@
 import {cloud} from "@/cloud"
 
 const DB = cloud.database()
-const DB_NAME = {
+const COLLECTION = {
     SYS_POST: 'sys_post'
 }
 
 export async function listPosts() {
     console.debug('Post[fetchList] request')
     const res = await DB
-        .collection(DB_NAME.SYS_POST)
+        .collection(COLLECTION.SYS_POST)
         .get()
     console.debug('列表查询结果: ', res.data)
     const r = {
@@ -23,12 +23,12 @@ export async function fetchList(query) {
     console.debug('Post[fetchList] request param query->', query)
     const {current, size} = query
     const res = await DB
-        .collection(DB_NAME.SYS_POST)
+        .collection(COLLECTION.SYS_POST)
         .where({})
         .skip(size * (current - 1))
         .limit(size)
         .get()
-    const {total} = await DB.collection(DB_NAME.SYS_POST)
+    const {total} = await DB.collection(COLLECTION.SYS_POST)
         .where({})
         .count()
     console.debug('分页查询结果: ', res.data)
@@ -49,20 +49,20 @@ export async function addObj(obj) {
         updateTime: new Date(),
         delFlag: '0'
     }
-    const r = await DB.collection(DB_NAME.SYS_POST).add(o)
+    const r = await DB.collection(COLLECTION.SYS_POST).add(o)
     console.debug('Post[addObj] result->', r)
     return r
 }
 
 export async function getObj(id) {
-    return await DB.collection(DB_NAME.SYS_POST)
+    return await DB.collection(COLLECTION.SYS_POST)
         .where({_id: id})
         .getOne()
 }
 
 export async function delObj(id) {
     console.debug('Post[delObj] request param id->', id)
-    const res = await DB.collection(DB_NAME.SYS_POST)
+    const res = await DB.collection(COLLECTION.SYS_POST)
         .where({_id: id})
         .remove()
     console.debug('Post[delObj] result->', res)
@@ -79,7 +79,7 @@ export async function putObj(obj) {
     }
     // 不可更新主键
     delete data._id
-    const res = await DB.collection(DB_NAME.SYS_POST)
+    const res = await DB.collection(COLLECTION.SYS_POST)
         .doc(id)
         .update(data)
     console.debug('Post[putObj] result->', res)

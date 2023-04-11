@@ -3,7 +3,7 @@ import {cloud} from "@/cloud"
 
 const DB = cloud.database()
 const CMD = DB.command
-const DB_NAME = {
+const COLLECTION = {
     SYS_DICT: 'sys_dict'
 }
 
@@ -18,12 +18,12 @@ export async function fetchList(query) {
         qo.systemFlag = systemFlag
     }
     const res = await DB
-        .collection(DB_NAME.SYS_DICT)
+        .collection(COLLECTION.SYS_DICT)
         .where(qo)
         .skip(size * (current - 1))
         .limit(size)
         .get()
-    const {total} = await DB.collection(DB_NAME.SYS_DICT)
+    const {total} = await DB.collection(COLLECTION.SYS_DICT)
         .where(qo)
         .count()
     console.debug('分页查询结果: ', res.data)
@@ -45,14 +45,14 @@ export async function addObj(obj) {
         delFlag: '0',
         records: []
     }
-    const r = await DB.collection(DB_NAME.SYS_DICT).add(o)
+    const r = await DB.collection(COLLECTION.SYS_DICT).add(o)
     console.debug('Dict[addObj] result->', r)
     return r
 }
 
 export async function getObj(id) {
     console.debug('Dict[getObj] request param ID->', id)
-    const res = await DB.collection(DB_NAME.SYS_DICT).where({
+    const res = await DB.collection(COLLECTION.SYS_DICT).where({
         _id: id
     }).getOne()
     console.debug('Dict[getObj] response result->', res)
@@ -61,7 +61,7 @@ export async function getObj(id) {
 
 export async function delObj(id) {
     console.debug('Dict[delObj] request param ID->', id)
-    const res = await DB.collection(DB_NAME.SYS_DICT).where({
+    const res = await DB.collection(COLLECTION.SYS_DICT).where({
         _id: id
     }).remove()
     console.debug('Dict[delObj] response result->', res)
@@ -72,7 +72,7 @@ export async function putObj(obj) {
     console.debug('Dict[putObj] request param query->', obj)
     const {_id: id} = obj
     const {data: param} = await DB
-        .collection(DB_NAME.SYS_DICT)
+        .collection(COLLECTION.SYS_DICT)
         .where({_id: id})
         .getOne()
     if (!param) {
@@ -86,7 +86,7 @@ export async function putObj(obj) {
     }
     console.debug('Dict[putObj] data->', data)
     delete data._id
-    const res = await DB.collection(DB_NAME.SYS_DICT)
+    const res = await DB.collection(COLLECTION.SYS_DICT)
         .doc(id)
         .update(data)
     console.debug('Dict[putObj] result->', res)
@@ -97,7 +97,7 @@ export async function fetchItemList(query) {
     console.debug('Dict[fetchItemList] request param query->', query)
     const {dictId} = query
     const {data: dict, ok} = await DB
-        .collection(DB_NAME.SYS_DICT)
+        .collection(COLLECTION.SYS_DICT)
         .where({_id: dictId})
         .getOne()
     if (!dict.records && dict.records.length === 0) {
@@ -117,7 +117,7 @@ export async function fetchItemList(query) {
 export async function addItemObj(obj) {
     console.debug('Dict[addItemObj] request param obj->', obj)
     const {dictId} = obj
-    const {data: dict} = await DB.collection(DB_NAME.SYS_DICT)
+    const {data: dict} = await DB.collection(COLLECTION.SYS_DICT)
         .where({_id: dictId})
         .getOne()
     if (!dict) {
@@ -131,7 +131,7 @@ export async function addItemObj(obj) {
         createTime: Date.now()
     }
     const res = await DB
-        .collection(DB_NAME.SYS_DICT)
+        .collection(COLLECTION.SYS_DICT)
         .doc(dictId)
         .update({
             records: CMD.push(doc)
@@ -142,7 +142,7 @@ export async function addItemObj(obj) {
 export async function delItemObj(dictId, id, dictType) {
     console.debug('Dict[delItemObj] request param dictId id->', dictId, id)
     const res = await DB
-        .collection(DB_NAME.SYS_DICT)
+        .collection(COLLECTION.SYS_DICT)
         .where({_id: dictId}
         )
         .update({
@@ -158,7 +158,7 @@ export async function delItemObj(dictId, id, dictType) {
 export async function putItemObj(obj) {
     console.debug('Dict[putItemObj] request param query->', obj)
     const {dictId, _id: itemId} = obj
-    const {data: dict} = await DB.collection(DB_NAME.SYS_DICT)
+    const {data: dict} = await DB.collection(COLLECTION.SYS_DICT)
         .where({_id: dictId})
         .getOne()
     if (!dict) {
@@ -166,7 +166,7 @@ export async function putItemObj(obj) {
     }
     const doc = {...obj, updateTime: Date.now()}
     const res = await DB
-        .collection(DB_NAME.SYS_DICT)
+        .collection(COLLECTION.SYS_DICT)
         .where(
             {
                 _id: dictId,
@@ -186,7 +186,7 @@ export async function putItemObj(obj) {
 export async function remote(type) {
     console.debug('Dict[remote] type->', type)
     const {data: dict, ok} = await DB
-        .collection(DB_NAME.SYS_DICT)
+        .collection(COLLECTION.SYS_DICT)
         .where({dictType: type})
         .getOne()
     if (!dict) {
@@ -209,7 +209,7 @@ export async function listDictItemByType(type) {
         throw new Error('参数不合法')
     }
     const {data, ok} = await DB
-        .collection(DB_NAME.SYS_DICT)
+        .collection(COLLECTION.SYS_DICT)
         .where({dictType: type})
         .getOne()
     console.debug('Dict[listDictItemByType] data->', data)

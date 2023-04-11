@@ -3,7 +3,7 @@ import qs from 'qs'
 
 const DB = cloud.database()
 const CMD = DB.command
-const DB_NAME = {
+const COLLECTION = {
     SYS_USER: 'sys_user',
     SYS_ROLE: 'sys_role',
     SYS_DEPT: 'sys_dept',
@@ -23,9 +23,9 @@ export async function fetchList(query) {
         qo.deptId = deptId
     }
     const {data: users, ok} = await DB
-        .collection(DB_NAME.SYS_USER)
+        .collection(COLLECTION.SYS_USER)
         .withOne({
-            query: DB.collection(DB_NAME.SYS_DEPT),
+            query: DB.collection(COLLECTION.SYS_DEPT),
             localField: "deptId",
             foreignField: "_id",
             as: "dept"
@@ -42,7 +42,7 @@ export async function fetchList(query) {
         }
     }
     const {total} = await DB
-        .collection(DB_NAME.SYS_USER)
+        .collection(COLLECTION.SYS_USER)
         .where(qo)
         .count()
     const data = await getUserAttrs(users)
@@ -65,9 +65,9 @@ export async function addObj(obj) {
 
 export async function getObj(id) {
     const {data: user, ok} = await DB
-        .collection(DB_NAME.SYS_USER)
+        .collection(COLLECTION.SYS_USER)
         .withOne({
-            query: DB.collection(DB_NAME.SYS_DEPT),
+            query: DB.collection(COLLECTION.SYS_DEPT),
             localField: "deptId",
             foreignField: "_id",
             as: "dept"
@@ -83,12 +83,12 @@ export async function getObj(id) {
     }
     // build userRoles
     const {data: userRoles} = await DB
-        .collection(DB_NAME.SYS_USER_ROLE)
+        .collection(COLLECTION.SYS_USER_ROLE)
         .where({userId: user._id})
         .get()
     if (userRoles) {
         const {data: roles} = await DB
-            .collection(DB_NAME.SYS_ROLE)
+            .collection(COLLECTION.SYS_ROLE)
             .where({_id: CMD.in(userRoles.map(({roleId}) => roleId))})
             .get()
         user.roleList = roles
@@ -96,12 +96,12 @@ export async function getObj(id) {
 
     // build userPosts
     const {data: userPosts} = await DB
-        .collection(DB_NAME.SYS_USER_POST)
+        .collection(COLLECTION.SYS_USER_POST)
         .where({userId: user._id})
         .get()
     if (userPosts) {
         const {data: posts} = await DB
-            .collection(DB_NAME.SYS_POST)
+            .collection(COLLECTION.SYS_POST)
             .where({_id: CMD.in(userPosts.map(({postId}) => postId))})
             .get()
         user.postList = posts
@@ -115,16 +115,16 @@ export async function getObj(id) {
 export async function delObj(id) {
     console.debug('User[delObj] id->', id)
     // 移除用户角色
-    await DB.collection(DB_NAME.SYS_USER_ROLE)
+    await DB.collection(COLLECTION.SYS_USER_ROLE)
         .where({userId: id})
         .remove()
     // 移除用户岗位
-    await DB.collection(DB_NAME.SYS_USER_POST)
+    await DB.collection(COLLECTION.SYS_USER_POST)
         .where({userId: id})
         .remove()
 
     // 移除用户
-    const res = await DB.collection(DB_NAME.SYS_USER)
+    const res = await DB.collection(COLLECTION.SYS_USER)
         .where({_id: id})
         .remove()
     console.debug('User[delObj] result->', res)
@@ -141,7 +141,7 @@ export async function putObj(obj) {
 export async function getDetails(username) {
     console.debug('User[getDetails] username->', username)
     const {data: user, ok} = await DB
-        .collection(DB_NAME.SYS_USER)
+        .collection(COLLECTION.SYS_USER)
         .where({username: username})
         .getOne()
     if (!user) {
@@ -161,7 +161,7 @@ export async function getDetails(username) {
 export async function getDetailsByPhone(phone) {
     console.debug('User[getDetailsByPhone] phone->', phone)
     const {data: user, ok} = await DB
-        .collection(DB_NAME.SYS_USER)
+        .collection(COLLECTION.SYS_USER)
         .where({phone: phone})
         .getOne()
     if (!user) {
@@ -192,24 +192,24 @@ export async function editInfo(obj) {
 async function getUserAttrs(users) {
     for (const user of users) {
         // build userRoles
-        const {data: userRoles} = await DB.collection(DB_NAME.SYS_USER_ROLE)
+        const {data: userRoles} = await DB.collection(COLLECTION.SYS_USER_ROLE)
             .where({userId: user._id})
             .get()
         if (userRoles) {
             const roleIds = userRoles.map(({roleId}) => roleId)
-            const {data: roles} = await DB.collection(DB_NAME.SYS_ROLE)
+            const {data: roles} = await DB.collection(COLLECTION.SYS_ROLE)
                 .where({_id: CMD.in(roleIds)})
                 .get()
             user.roleList = roles
         }
 
         // build userPosts
-        const {data: userPosts} = await DB.collection(DB_NAME.SYS_USER_POST)
+        const {data: userPosts} = await DB.collection(COLLECTION.SYS_USER_POST)
             .where({userId: user._id})
             .get()
         if (userPosts) {
             const postIds = userPosts.map(({postId}) => postId)
-            const {data: posts} = await DB.collection(DB_NAME.SYS_POST)
+            const {data: posts} = await DB.collection(COLLECTION.SYS_POST)
                 .where({_id: CMD.in(postIds)})
                 .get()
             user.postList = posts

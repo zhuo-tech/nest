@@ -1,7 +1,7 @@
 import {cloud} from "@/cloud"
 
 const DB = cloud.database()
-const DB_NAME = {
+const COLLECTION = {
     SYS_SOCIAL: 'sys_social'
 }
 
@@ -9,12 +9,12 @@ export async function fetchList(query) {
     console.debug('Social[fetchList] request param query->', query)
     const {current, size} = query
     const res = await DB
-        .collection(DB_NAME.SYS_SOCIAL)
+        .collection(COLLECTION.SYS_SOCIAL)
         .where({})
         .skip(size * (current - 1))
         .limit(size)
         .get()
-    const {total} = await DB.collection(DB_NAME.SYS_SOCIAL)
+    const {total} = await DB.collection(COLLECTION.SYS_SOCIAL)
         .where({})
         .count()
     console.debug('分页查询结果: ', res.data)
@@ -34,19 +34,19 @@ export async function addObj(obj) {
         updateTime: Date.now(),
         createTime: Date.now()
     }
-    const res = await DB.collection(DB_NAME.SYS_SOCIAL)
+    const res = await DB.collection(COLLECTION.SYS_SOCIAL)
         .add(o)
     console.log('Social[addObj] response result->', res)
 }
 
 export async function getObj(id) {
-    return await DB.collection(DB_NAME.SYS_SOCIAL)
+    return await DB.collection(COLLECTION.SYS_SOCIAL)
         .where({_id: id})
         .getOne()
 }
 
 export async function delObj(id) {
-    return await DB.collection(DB_NAME.SYS_SOCIAL).where({
+    return await DB.collection(COLLECTION.SYS_SOCIAL).where({
         _id: id
     }).remove()
 }
@@ -61,7 +61,7 @@ export async function putObj(obj) {
     }
     // 不可更新主键
     delete data._id
-    const res = await DB.collection(DB_NAME.SYS_SOCIAL)
+    const res = await DB.collection(COLLECTION.SYS_SOCIAL)
         .doc(id)
         .update(data)
     console.debug('Social[putObj] result->', res)

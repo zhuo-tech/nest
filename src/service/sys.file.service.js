@@ -1,7 +1,7 @@
 import {cloud} from "@/cloud"
 
 const DB = cloud.database()
-const DB_NAME = {
+const COLLECTION = {
     SYS_FILE: 'sys_file'
 }
 
@@ -16,12 +16,12 @@ export async function fetchList(query) {
         qo.bucketName = bucketName
     }
     const res = await DB
-        .collection(DB_NAME.SYS_FILE)
+        .collection(COLLECTION.SYS_FILE)
         .where(qo)
         .skip(size * (current - 1))
         .limit(size)
         .get()
-    const {total} = await DB.collection(DB_NAME.SYS_FILE)
+    const {total} = await DB.collection(COLLECTION.SYS_FILE)
         .where(qo)
         .count()
     console.debug('分页查询结果: ', res.data)
@@ -36,7 +36,7 @@ export async function fetchList(query) {
 
 export async function delObj(id) {
     console.debug('File[delObj] request param ID->', id)
-    const res = await DB.collection(DB_NAME.SYS_FILE).where({
+    const res = await DB.collection(COLLECTION.SYS_FILE).where({
         _id: id
     }).remove()
     console.debug('File[delObj] response result->', res)
