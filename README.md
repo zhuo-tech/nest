@@ -107,7 +107,8 @@
   > 说明:
   > - 替换自己的应用
   > - [laf-assistant](https://forum.laf.run/d/67) 同步云函数
-  > - 执行初始化数据函数 `init-collection-data`
+  > - 执行初始化数据函数 `init-collection-data`   
+  
 - 安装依赖
   ``` js
   npm i
@@ -116,4 +117,9 @@
   ``` js 
   npm run dev
   ```
+- 常见问题
+	1. 404 应该是你没有配置访问策略
+	2. 403 集合没有开发访问权限
+	[访问策略](https://doc.laf.run/guide/db/policy.html)
+  
 
