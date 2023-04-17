@@ -141,7 +141,10 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(function () {
-        return delObj(row._id)
+        const {code, msg} = delObj(row._id)
+        if (code !== 0) {
+          this.$message.error(msg)
+        }
       }).then(() => {
         this.getList()
         this.$message.success('删除成功')

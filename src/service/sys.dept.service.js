@@ -1,4 +1,5 @@
 import {cloud} from "@/cloud"
+import {R} from "@/util/R";
 
 const DB = cloud.database()
 const COLLECTION = {
@@ -51,11 +52,18 @@ export async function getObj(id) {
 
 export async function delObj(id) {
     console.log('Dept[delObj] request param ID->', id)
+    const {total} = await DB
+        .collection(COLLECTION.SYS_DEPT)
+        .where({parentId: id})
+        .count()
+    if (total > 0) {
+        return R.failed('该节点下存在数据')
+    }
     const res = await DB.collection(COLLECTION.SYS_DEPT).where({
         _id: id
     }).remove()
     console.log('Dept[delObj] response result->', res)
-    return res
+    return R.ok(res.deleted)
 }
 
 export async function putObj(obj) {
