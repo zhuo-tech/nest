@@ -16,6 +16,8 @@ import {base64Encrypt} from './util/encryption'
 import * as urls from '@/config/env'
 import {iconfontUrl} from '@/config/env'
 import * as filters from './filters' // 全局filter
+// 表单设计
+import AvueFormDesign from '@sscfaith/avue-form-design'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './styles/common.scss'
@@ -38,6 +40,8 @@ Vue.use(router)
 window.axios = axios
 Vue.use(VueAxios, axios)
 
+Vue.use(AvueFormDesign)
+
 Vue.use(ElementUI, {
     size: 'small',
     menuType: 'text'
@@ -51,7 +55,6 @@ Vue.use(AVUE, {
 // 注册全局容器
 Vue.component('basicContainer', basicContainer)
 Vue.component('DictTag', DictTag)
-
 // 加载相关url地址
 Object.keys(urls).forEach(key => {
     Vue.prototype[key] = urls[key]

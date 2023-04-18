@@ -1,5 +1,6 @@
 import {cloud} from "@/cloud"
 import qs from 'qs'
+import {R} from "@/util/R";
 
 const DB = cloud.database()
 const CMD = DB.command
@@ -233,5 +234,5 @@ export const loginByUsername = async (username, password) => {
 }
 
 export const logout = async () => {
-    return {"code": 0, "msg": 'success', "data": true}
+    return R.ok(true)
 }
