@@ -1,6 +1,7 @@
 import {cloud} from "@/cloud"
 import qs from 'qs'
 import {R} from "@/util/R";
+import request from '@/router/axios'
 
 const DB = cloud.database()
 const CMD = DB.command
@@ -219,18 +220,21 @@ async function getUserAttrs(users) {
     return users
 }
 
-export const getUserInfo = async () => {
-    return await cloud.invokeFunction('sys-user-info', {})
+export const getUserInfo = () => {
+    return request({
+        url: '/func/sys-user-info',
+        method: 'GET',
+    });
 }
 
 
-export const loginByUsername = async (username, password) => {
-    const param = qs.parse({username: username, password: password})
-    const res = await cloud.invokeFunction(
-        'sys-user-login',
-        param
-    )
-    return res
+export const loginByUsername = (username, password) => {
+    const data = qs.parse({username: username, password: password})
+    return request({
+        url: '/func/sys-user-login',
+        method: 'POST',
+        data: data
+    });
 }
 
 export const logout = async () => {

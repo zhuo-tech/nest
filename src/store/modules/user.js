@@ -52,7 +52,7 @@ const user = {
         LoginByUsername({commit}, userInfo) {
             return new Promise((resolve, reject) => {
                 loginByUsername(userInfo.username, userInfo.password).then(response => {
-                    const data = response.data
+                    const data = response.data.data
                     commit('SET_ACCESS_TOKEN', data.access_token)
                     commit('CLEAR_LOCK')
                     resolve()
@@ -65,7 +65,7 @@ const user = {
         GetUserInfo({commit}) {
             return new Promise((resolve, reject) => {
                 getUserInfo().then((res) => {
-                    const data = res.data || {}
+                    const data = res.data.data || {}
                     commit('SET_USER_INFO', data.user)
                     commit('SET_ROLES', data.roles || [])
                     commit('SET_PERMISSIONS', data.permissions || [])
@@ -81,7 +81,7 @@ const user = {
             commit('LIKE_TOP_MENUID', obj)
             return new Promise(resolve => {
                 getMenu(obj._id).then((res) => {
-                    const data = res.data
+                    const data = res.data.data
                     const menu = deepClone(data)
                     menu.forEach(ele => {
                         addPath(ele)
@@ -96,7 +96,7 @@ const user = {
         GetTopMenu() {
             return new Promise(resolve => {
                 getTopMenu().then((res) => {
-                    const data = res.data || []
+                    const data = res.data.data || []
                     resolve(data)
                 })
             })

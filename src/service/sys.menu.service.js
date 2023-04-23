@@ -1,5 +1,6 @@
 import {cloud} from "@/cloud"
 import {R} from "@/util/R";
+import request from "@/router/axios";
 
 const DB = cloud.database()
 const COLLECTION = {
@@ -16,15 +17,30 @@ const COLLECTION = {
  * @returns {Promise<*>}
  */
 export async function getMenu(id) {
-    return await cloud.invokeFunction('sys-user-resource', {id})
+    if (!id) {
+        return request({
+            url: '/func/sys-user-resource',
+            method: 'POST'
+        });
+    }
+    const data = qs.parse({_id: id})
+    return request({
+        url: '/func/sys-user-resource',
+        method: 'POST',
+        data: data
+    });
 }
 
 /**
  * 查询当前用户顶部菜单信息
  * @returns {Promise<*>}
  */
-export async function getTopMenu() {
-    return await cloud.invokeFunction('sys-user-resource', {type: 'top'})
+export function getTopMenu() {
+    return request({
+        url: '/func/sys-user-resource',
+        method: 'POST',
+        data: {type: 'top'}
+    });
 }
 
 /**
