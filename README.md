@@ -120,6 +120,6 @@
   ```
 - 常见问题
 	> 1. 404 [未配置访问策略](https://doc.laf.run/guide/db/policy.html)
-	> 2. 403 [集合未开发访问权限](https://doc.laf.run/guide/db/policy.html)
+	> 2. 403 [未开放访问权限](https://doc.laf.run/guide/db/policy.html)
   
 
