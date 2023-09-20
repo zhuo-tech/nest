@@ -103,6 +103,7 @@
 
 
 ## 🚀 Quick Start
+- [仓库地址](https://github.com/zhuo-tech/nest)
 - 初始化
   > 说明:
   > - 替换自己的应用
